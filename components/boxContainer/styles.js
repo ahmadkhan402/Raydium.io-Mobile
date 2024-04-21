@@ -9,10 +9,16 @@ const styles = StyleSheet.create({
       padding: 20,
       height: height(58),
       width: width(92),
+      borderRightWidth:0.4,
+      borderRightColor:color.colorFuchsia,
+      elevation:20,
+      borderTopWidth:3,
+      borderTopColor:"rgba(59, 208, 216, .2)",
     },
     innerContainer: {
       marginTop: 20,
       marginBottom: 20,
+      
     },
     fromContainer: {
       backgroundColor: '#141041',
@@ -51,11 +57,13 @@ const styles = StyleSheet.create({
     },
     coinInfo: {
       flex: 1,
+      flexDirection:"row"
     },
     coinText: {
       color: '#ABC4FF',
       fontSize: 14,
       fontWeight: 'bold',
+      paddingRight:5
     },
     inputSection: {
       flex: 1,
@@ -94,13 +102,19 @@ const styles = StyleSheet.create({
       height: 24,
     },
     connectWalletButton: {
-      backgroundColor: '#39D0D8',
       paddingVertical: 12,
-      borderRadius: 20,
+      borderRadius: 10,
+      elevation:40,
+     borderRightWidth:0.1,
+     borderLeftWidth:0.1,
+     borderBottomWidth:0.1,
+     borderTopWidth:0.1,
+      borderColor:"#58f3cd",
       alignItems: 'center',
+      
     },
     connectWalletButtonText: {
-      color: '#FFFFFF',
+      color: color.menuColor,
       fontWeight: 'bold',
       fontSize: 16,
     },

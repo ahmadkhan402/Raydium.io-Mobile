@@ -42,7 +42,12 @@
 
 const color = {
 menuColor:'#39D0D8',
-primaryColor:'#192f6a'
+primaryColor:'#192f6a',
+darkblue:'#141041',
+lightblue:"#18337d",
+btnText:"#3bd0d8",
+colorFuchsia: "#da2eef"
+
 }
 "#18337d",'#192f6a'
 

@@ -1,10 +1,15 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import ReydiamIndex from './src/screens/home';
+import DrawerNavigator from './routes/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './routes/stack';
 
 const App = () => {
   return (
-    <ReydiamIndex/>
+  //   <NavigationContainer>
+   <DrawerNavigator/>
+  //  </NavigationContainer>
   );
 };
 
