@@ -4,8 +4,9 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#0c0927',
-      justifyContent: 'flex-start',
-      paddingHorizontal: 15,
+      justifyContent: 'center',
+
+      paddingTop:10
     },
     header: {
         padding:15,
@@ -91,6 +92,9 @@ const styles = StyleSheet.create({
       color: '#FFFFFF',
       fontWeight: 'bold',
     },
+    boxCont:{
+        alignItems:"center"
+    }
     
   });
   

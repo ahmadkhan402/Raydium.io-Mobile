@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
 import styles from './styles';
 import Header from '../../../components/header';
 import { LinearGradient } from 'expo-linear-gradient';
 import BoxContainer from '../../../components/boxContainer';
+import BoxContainer2 from '../../../components/boxConatiner2';
 
 export default function ReydiamIndex() {
     const [closed, setClosed] = useState(true)
@@ -14,7 +15,7 @@ export default function ReydiamIndex() {
         setSelectedOption(option);
     };
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {/* Header */}
             {closed && <View style={styles.header}>
                 <Text style={styles.headerText}>
@@ -72,6 +73,8 @@ export default function ReydiamIndex() {
                             </Text>
                         </TouchableOpacity>
                     )}
+
+                {/* Liquidity Radio Button */}
                     {selectedOption === 'liquidity' ? (
                         <LinearGradient
                             colors={["#aadefe", "#0993ecd9"]}
@@ -106,9 +109,20 @@ export default function ReydiamIndex() {
                     )}
                 </View>
 
-                <BoxContainer />
+                {/* Box Container */}
+
+{selectedOption === 'swap' ? (
+    <View style={styles.boxCont}>
+    <BoxContainer />
+    </View>
+): (
+    <View style={styles.boxCont}>
+    <BoxContainer2 />
+    </View>
+)}
+               
 
             </ScrollView>
- </View>
+ </SafeAreaView>
     )
 }

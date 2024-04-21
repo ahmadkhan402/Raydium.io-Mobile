@@ -46,8 +46,10 @@ primaryColor:'#192f6a',
 darkblue:'#141041',
 lightblue:"#18337d",
 btnText:"#3bd0d8",
-colorFuchsia: "#da2eef"
-
+colorFuchsia: "#da2eef",
+colorDisable: "#292d41",
+itembg:"rgba(59, 208, 216, .2)",
+itembg2:"rgba(59, 208, 216, 0)"
 }
 "#18337d",'#192f6a'
 
