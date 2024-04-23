@@ -9,7 +9,6 @@ import LiquidityBoxContainer from '../../../components/LiquidityBox';
 
 
 export default function ReydiamIndex() {
-    const [closed, setClosed] = useState(true)
     const [selectedOption, setSelectedOption] = useState('swap');
 
     const handleOptionChange = (option) => {
@@ -18,24 +17,6 @@ export default function ReydiamIndex() {
     return (
         <SafeAreaView style={styles.container}>
             {/* Header */}
-            {closed && <View style={styles.header}>
-                <Text style={styles.headerText}>
-                    In case you missed it, Raydium V3 Beta is live - check it out{' '}
-                    <Text style={styles.linkText} onPress={() => Linking.openURL('https://beta.raydium.io')}>
-                        here
-                    </Text>
-                    ! More info in the{' '}
-                    <Text style={styles.linkText} onPress={() => Linking.openURL('https://x.com/RaydiumProtocol/status/1772563377501724786')}>
-                        Tweet
-                    </Text>
-                    .
-                </Text>
-
-                <TouchableOpacity style={styles.closeButton} onPress={() => setClosed(false)}>
-                    <Text style={styles.closeButtonText}>×</Text>
-                </TouchableOpacity>
-            </View>
-            }
             <Header />
             {/* Main Content */}
             <ScrollView contentContainerStyle={styles.contentContainer}>
