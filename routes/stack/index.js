@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import ReydiamIndex from "../../src/screens/home";
 import ScreenNames from "../route";
+import Pool from "../../src/screens/Pool";
 
 const Stack = createNativeStackNavigator();
 const navigationRef = createNavigationContainerRef();
@@ -17,8 +18,8 @@ const navigationRef = createNavigationContainerRef();
 export default function Routes() {
   return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName={ScreenNames.HOME} screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={ScreenNames.HOME} component={ReydiamIndex} />
+      <Stack.Navigator initialRouteName={ScreenNames.POOL} screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={ScreenNames.POOL} component={Pool} />
       </Stack.Navigator>
  </NavigationContainer>
   );

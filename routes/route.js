@@ -1,7 +1,8 @@
 const ScreenNames = {
   CONNECTWALLET: "ConnectWallet",
     HOME: "Home",
-    ROUTE: "Route",
+  ROUTE: "Route",
+  POOL: "Pool",
   };
   
   export default ScreenNames;
