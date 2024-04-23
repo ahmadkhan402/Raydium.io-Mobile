@@ -1,16 +1,21 @@
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
 import styles from './styles';
 import Header from '../../../components/header';
 import { LinearGradient } from 'expo-linear-gradient';
 import SwapBoxContainer from '../../../components/SwapBox';
 import LiquidityBoxContainer from '../../../components/LiquidityBox';
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function ReydiamIndex() {
+    const navigation = useNavigation()
     const [selectedOption, setSelectedOption] = useState('swap');
+    useEffect(() => {
+        const navUpdate = async () => await setSelectedOption('swap')
+        navUpdate();
 
+    }, [navigation])
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
