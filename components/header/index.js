@@ -15,7 +15,7 @@ export default function Header({ title }) {
   };
   const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
-
+const [sortValue, setSorted] = useState(sortOptions[0]);
   const handleSortOptionSelect = (option) => {
     setSorted(option);
     setModalVisible(false);
@@ -38,7 +38,7 @@ export default function Header({ title }) {
       {
         title == ScreenNames.CONCENTRATED || title == ScreenNames.FARMS ? (
           <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.headerModelContainer}>
-            <Text style={styles.headerSelectedText}>SomeText</Text>
+            <Text style={styles.headerSelectedText}>{sortValue}</Text>
             <AntDesign name="down" size={14} color="gray" />
           </TouchableOpacity>
         ) :
@@ -190,11 +190,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 10,
-    
+    margin:5,
+
+    height: 40,
   },
   headerSelectedText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize:16,
     color: 'white',
   },
   modalBackdrop: {
