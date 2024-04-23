@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
 import styles from './styles';
 import Header from '../../../components/header';
@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import SwapBoxContainer from '../../../components/SwapBox';
 import LiquidityBoxContainer from '../../../components/LiquidityBox';
 import { useNavigation } from '@react-navigation/native';
+import ChartView from '../../../components/chartView';
 
 export default function ReydiamIndex() {
     const navigation = useNavigation()
@@ -61,7 +62,7 @@ export default function ReydiamIndex() {
                         </TouchableOpacity>
                     )}
 
-                {/* Liquidity Radio Button */}
+                    {/* Liquidity Radio Button */}
                     {selectedOption === 'liquidity' ? (
                         <LinearGradient
                             colors={["#aadefe", "#0993ecd9"]}
@@ -98,18 +99,19 @@ export default function ReydiamIndex() {
 
                 {/* Box Container */}
 
-{selectedOption === 'swap' ? (
-    <View style={styles.boxCont}>
-    <SwapBoxContainer/>
-    </View>
-): (
-    <View style={styles.boxCont}>
-  <LiquidityBoxContainer/>
-    </View>
-)}
-               
-
+                {selectedOption === 'swap' ? (
+                    <View style={styles.boxCont}>
+                        <SwapBoxContainer />
+                    </View>
+                ) : (
+                    <View style={styles.boxCont}>
+                        <LiquidityBoxContainer />
+                    </View>
+                )}
+<View style={{marginVertical:30}}>
+                <ChartView />
+                </View>
             </ScrollView>
- </SafeAreaView>
+        </SafeAreaView>
     )
 }

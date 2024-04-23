@@ -124,6 +124,9 @@ export default function SwapBoxContainer() {
                                 </View>
                                 <View style={styles.coinInfo}>
                                     <Text style={styles.coinText}>RAY</Text>
+                                    <TouchableOpacity >
+                                        <AntDesign name="down" size={20} color="#FFFFFF" />
+                                    </TouchableOpacity>
                                 </View>
 
                                 <TouchableOpacity style={styles.maxButtonDisabled} disabled>
