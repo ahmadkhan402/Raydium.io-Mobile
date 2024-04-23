@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-export default function BoxContainer() {
+export default function SwapBoxContainer() {
 
     const [isSwapped, setIsSwapped] = useState(false);
 

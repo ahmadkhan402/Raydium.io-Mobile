@@ -7,7 +7,7 @@ import color from '../../src/utills/Database';
 
 
 
-export default function BoxContainer2() {
+export default function LiquidityBoxContainer() {
 
     const toggleAdd = () => {
 

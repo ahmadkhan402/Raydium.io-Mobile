@@ -4,8 +4,9 @@ import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 
 import styles from './styles';
 import Header from '../../../components/header';
 import { LinearGradient } from 'expo-linear-gradient';
-import BoxContainer from '../../../components/boxContainer';
-import BoxContainer2 from '../../../components/boxConatiner2';
+import SwapBoxContainer from '../../../components/SwapBox';
+import LiquidityBoxContainer from '../../../components/LiquidityBox';
+
 
 export default function ReydiamIndex() {
     const [closed, setClosed] = useState(true)
@@ -113,11 +114,11 @@ export default function ReydiamIndex() {
 
 {selectedOption === 'swap' ? (
     <View style={styles.boxCont}>
-    <BoxContainer />
+    <SwapBoxContainer/>
     </View>
 ): (
     <View style={styles.boxCont}>
-    <BoxContainer2 />
+  <LiquidityBoxContainer/>
     </View>
 )}
                
