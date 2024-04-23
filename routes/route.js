@@ -1,8 +1,14 @@
 const ScreenNames = {
   CONNECTWALLET: "ConnectWallet",
-    HOME: "Home",
+  SWAP: "Swap",
+  LIQUIDITY: "Liquidity",
   ROUTE: "Route",
+  CONCENTRATED: "Concentrated",
   POOL: "Pool",
+  FARMS: "Farms",
+  STAKING: "Staking",
+  ACCELERAYTOR: "AcceleRaytor",
+
   };
   
   export default ScreenNames;

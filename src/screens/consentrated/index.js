@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import { StyleSheet, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import Header from '../../../components/header';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import ScreenNames from '../../../routes/route';
 
-export default function Pool() {
+export default function Consentrated() {
+  //get screen name
+  const ScreenName = ScreenNames.CONCENTRATED
   const [sorted, setSorted] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"]; // Add your sort options here
+  const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
 
   const handleSortOptionSelect = (option) => {
     setSorted(option);
     setModalVisible(false);
   };
-  const data  = null; // Add your data here
+  const data = null;
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Pool" />
+      <Header title={ScreenName} />
       <View style={styles.TVL_VolumeContainer}>
         <Text style={styles.TVL_VolumeContainerText}><Text style={styles.TVL_VolumeContainerTextTitle}>TVL</Text> : $0.00</Text>
         <Text style={styles.TVL_VolumeContainerText}><Text style={styles.TVL_VolumeContainerTextTitle}>Volume</Text> : $0.00</Text>
@@ -49,8 +53,8 @@ export default function Pool() {
               )}
             />
           ) : (
-              <ActivityIndicator style={{
-                flex: 1,
+            <ActivityIndicator style={{
+              flex: 1,
             }} size="large" color="white" />
           )
         }
