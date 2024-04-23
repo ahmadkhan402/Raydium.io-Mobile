@@ -1,33 +1,41 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { NavigationContainer, useIsFocused, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import ScreenNames from '../route';
 import ReydiamIndex from '../../src/screens/home';
+import Pool from '../../src/screens/Pool';
 import styles from './styles';
+import Liquidity from '../../src/screens/liquidity';
+import Consentrated from '../../src/screens/consentrated';
 
 const Drawer = createDrawerNavigator();
 
-function CustomDrawerContent() {
+function CustomDrawerContent(props) {
   const navigation = useNavigation();
 
-
   const drawerItems = [
-    { label: 'Swap', icon: require('./../../assets/icons/swap.png') },
-    { label: 'Liquidity', icon: require('./../../assets/icons/entry-icon-liquidity.png') },
-    { label: 'Concentrated', icon: require('./../../assets/icons/entry-icon-concentrated-pools.png') },
-    { label: 'Pools', icon: require('./../../assets/icons/entry-icon-pools.png') },
-    { label: 'Farms', icon: require('./../../assets/icons/entry-icon-farms.png') },
-    { label: 'Staking', icon: require('./../../assets/icons/entry-icon-staking.png') },
-    { label: 'AcceleRaytor', icon: require('./../../assets/icons/entry-icon-acceleraytor.png') },
+    { label: 'Swap', icon: require('./../../assets/icons/swap.png'), screen: ScreenNames.SWAP },
+    { label: 'Liquidity', icon: require('./../../assets/icons/entry-icon-liquidity.png'), screen: ScreenNames.LIQUIDITY },
+    { label: 'Concentrated', icon: require('./../../assets/icons/entry-icon-concentrated-pools.png'), screen: ScreenNames.CONCENTRATED },
+    { label: 'Pools', icon: require('./../../assets/icons/entry-icon-pools.png'), screen: ScreenNames.POOL },
+    { label: 'Farms', icon: require('./../../assets/icons/entry-icon-farms.png'), screen: ScreenNames.FARMS },
+    { label: 'Staking', icon: require('./../../assets/icons/entry-icon-staking.png'), screen: ScreenNames.STAKING},
+    { label: 'AcceleRaytor', icon: require('./../../assets/icons/entry-icon-acceleraytor.png'), screen: ScreenNames.ACCELERAYTOR },
   ];
 
-
   const renderItem = (item, index) => (
-    <TouchableOpacity key={index} style={styles.drawerItem}>
+    <TouchableOpacity
+      key={index}
+      style={styles.drawerItem}
+      onPress={() => {
+        props.navigation.closeDrawer(); 
+        props.navigation.navigate(item.screen);
+      }}
+    >
       <View style={styles.itemIconContainer}>
-        <Image source={ item.icon } style={styles.itemIcon} />
+        <Image source={item.icon} style={styles.itemIcon} />
       </View>
       <Text style={styles.itemText}>{item.label}</Text>
     </TouchableOpacity>
@@ -62,7 +70,11 @@ export default function DrawerNavigator() {
           },
         }}
       >
-        <Drawer.Screen name={ScreenNames.HOME} component={ReydiamIndex} />
+        <Drawer.Screen name={ScreenNames.SWAP} component={ReydiamIndex} />
+        <Drawer.Screen name={ScreenNames.LIQUIDITY} component={Liquidity} />
+        <Drawer.Screen name={ScreenNames.CONCENTRATED} component={Consentrated} />
+
+        <Drawer.Screen name={ScreenNames.POOL} component={Pool} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

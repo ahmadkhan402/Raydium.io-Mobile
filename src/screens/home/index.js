@@ -1,41 +1,27 @@
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
 import styles from './styles';
 import Header from '../../../components/header';
 import { LinearGradient } from 'expo-linear-gradient';
 import SwapBoxContainer from '../../../components/SwapBox';
 import LiquidityBoxContainer from '../../../components/LiquidityBox';
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function ReydiamIndex() {
-    const [closed, setClosed] = useState(true)
+    const navigation = useNavigation()
     const [selectedOption, setSelectedOption] = useState('swap');
+    useEffect(() => {
+        const navUpdate = async () => await setSelectedOption('swap')
+        navUpdate();
 
+    }, [navigation])
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
     return (
         <SafeAreaView style={styles.container}>
             {/* Header */}
-            {closed && <View style={styles.header}>
-                <Text style={styles.headerText}>
-                    In case you missed it, Raydium V3 Beta is live - check it out{' '}
-                    <Text style={styles.linkText} onPress={() => Linking.openURL('https://beta.raydium.io')}>
-                        here
-                    </Text>
-                    ! More info in the{' '}
-                    <Text style={styles.linkText} onPress={() => Linking.openURL('https://x.com/RaydiumProtocol/status/1772563377501724786')}>
-                        Tweet
-                    </Text>
-                    .
-                </Text>
-
-                <TouchableOpacity style={styles.closeButton} onPress={() => setClosed(false)}>
-                    <Text style={styles.closeButtonText}>×</Text>
-                </TouchableOpacity>
-            </View>
-            }
             <Header />
             {/* Main Content */}
             <ScrollView contentContainerStyle={styles.contentContainer}>

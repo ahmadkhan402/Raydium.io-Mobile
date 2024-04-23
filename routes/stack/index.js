@@ -8,17 +8,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import ReydiamIndex from "../../src/screens/home";
 import ScreenNames from "../route";
+import Pool from "../../src/screens/Pool";
+import Liquidity from "../../src/screens/liquidity";
 
 const Stack = createNativeStackNavigator();
 const navigationRef = createNavigationContainerRef();
 
 
-
 export default function Routes() {
   return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName={ScreenNames.HOME} screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={ScreenNames.HOME} component={ReydiamIndex} />
+      <Stack.Navigator initialRouteName={ScreenNames.SWAP} screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={ScreenNames.SWAP} component={ReydiamIndex} />
+        <Stack.Screen name={ScreenNames.LIQUIDITY} component={Liquidity} />
       </Stack.Navigator>
  </NavigationContainer>
   );
