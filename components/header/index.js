@@ -4,7 +4,7 @@ import styles from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Header() {
+export default function Header({ title }) {
   const navigation = useNavigation();
         const [isChecked, setIsChecked] = useState(false);
         const toggleSwitch = () => {
@@ -25,7 +25,10 @@ export default function Header() {
           style={styles.icon}
         />
       </TouchableOpacity>
-      <Text style={styles.title}>Swap</Text>
+      <Text style={styles.title}>{
+        title ? title : 'Swap'
+      
+      }</Text>
       <View style={styles.rightSection}>
               <View style={styles.versTxContainer}>
                   <Text style={styles.versTxText}>Vers. Tx</Text>

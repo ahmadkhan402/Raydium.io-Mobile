@@ -151,9 +151,7 @@ export default function SwapBoxContainer() {
                             />
                         </TouchableOpacity>
                         <View style={styles.fromContainer}>
-                                <Text style={styles.labelText}>
-                                  {  !isSwapped ? 'From' : 'To'}
-                            </Text>
+                            <Text style={styles.labelText}>From</Text>
                             <Text style={styles.balanceText}>Balance: (Wallet not connected)</Text>
                             <View style={styles.inputRow}>
                                 <View style={styles.coinAvatar}>

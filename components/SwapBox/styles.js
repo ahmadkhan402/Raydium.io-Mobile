@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
       marginBottom: 20,
       
     },
-  fromContainer: {
-      top: -20,
+    fromContainer: {
       backgroundColor: '#141041',
       borderRadius: 20,
       padding: 20,
@@ -98,13 +97,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginBottom: 20,
     },
-  swapIcon: {
-      top: -5,
+    swapIcon: {
       width: 24,
       height: 24,
     },
-  connectWalletButton: {
-      top: -10,
+    connectWalletButton: {
       paddingVertical: 12,
       borderRadius: 10,
       elevation:40,
@@ -117,7 +114,6 @@ const styles = StyleSheet.create({
       
     },
     connectWalletButtonText: {
-      
       color: color.menuColor,
       fontWeight: 'bold',
       fontSize: 16,
