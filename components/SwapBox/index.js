@@ -85,9 +85,10 @@ export default function SwapBoxContainer() {
         >
             <View style={styles.innerContainer}>
                 <CoinInput coinInfo={coinFrom} />
-                <TouchableOpacity onPress={toggleSwap} style={styles.swapIconContainer}>
+                <TouchableOpacity onPress={toggleSwap} style={[styles.swapIconContainer, { transform: [{ rotate: '90deg' }] }]}>
                     <AntDesign name="swap" size={24} color="#FFFFFF" />
                 </TouchableOpacity>
+
                 <CoinInput coinInfo={coinTo} />
                 <LinearGradient
                     colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       backgroundColor: color.primaryColor,
       borderRadius: 20,
       padding: 20,
-      height: height(58),
+      height: height(60),
       width: width(92),
       borderRightWidth:0.4,
       borderRightColor:color.colorFuchsia,
@@ -93,16 +93,17 @@ const styles = StyleSheet.create({
       color: 'rgba(171,196,255,0.5)',
       alignSelf: 'flex-end',
     },
-    swapIconContainer: {
+  swapIconContainer: {
+      top:-5,
       alignItems: 'center',
-      marginBottom: 20,
+     margin:5
     },
     swapIcon: {
       width: 24,
       height: 24,
     },
   connectWalletButton: {
-      bottom:40,
+      bottom:10,
       paddingVertical: 12,
       borderRadius: 10,
       elevation:40,
