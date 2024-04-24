@@ -34,17 +34,17 @@ export default function Pool() {
               <Text style={styles.sortText}>Sort by: {sorted}</Text>
             </TouchableOpacity>
             {
-              isExpanded ? 
+              isExpanded ?
                 sortOptions.map((option, index) => (
-                  <TouchableOpacity key={index}  onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.modalOption}>{option}</Text>
+                  <TouchableOpacity style={styles.sortDropDown} key={index} onPress={() => handleSortOptionSelect(option)}>
+                    <Text style={styles.sortText}>{option}</Text>
                   </TouchableOpacity>
                 )) : null
             }
           </View>
-          <View style={styles.threeDotIcon}>
+          <TouchableOpacity style={styles.threeDotIcon}>
             <AntDesign name="ellipsis1" size={24} color="white" />
-          </View>
+          </TouchableOpacity>
         </View>
         {
           data ? (
