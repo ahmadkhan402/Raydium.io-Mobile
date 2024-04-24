@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0c0927',
     justifyContent: 'center',
 
-    paddingTop: 10
   },
   header: {
     padding: 15,
