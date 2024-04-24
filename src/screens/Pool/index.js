@@ -6,14 +6,13 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function Pool() {
   const [sorted, setSorted] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"]; // Add your sort options here
-
+  const [isExpanded, setIsExpanded] = useState(false);
   const handleSortOptionSelect = (option) => {
     setSorted(option);
-    setModalVisible(false);
+    setIsExpanded(false);
   };
-  const data  = null; // Add your data here
+  const data  = null;// Add your data here
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Pool" />
@@ -30,11 +29,21 @@ export default function Pool() {
               style={styles.searchInput}
             />
           </View>
-          <TouchableOpacity style={styles.sortDropDown} onPress={() => setModalVisible(true)}>
-            <Text style={styles.sortText}>Sort by: {sorted}</Text>
-          </TouchableOpacity>
+          <View style={styles.expandableContainer}>
+            <TouchableOpacity style={styles.sortDropDown} onPress={() => setIsExpanded(true)}>
+              <Text style={styles.sortText}>Sort by: {sorted}</Text>
+            </TouchableOpacity>
+            {
+              isExpanded ? 
+                sortOptions.map((option, index) => (
+                  <TouchableOpacity key={index}  onPress={() => handleSortOptionSelect(option)}>
+                    <Text style={styles.modalOption}>{option}</Text>
+                  </TouchableOpacity>
+                )) : null
+            }
+          </View>
           <View style={styles.threeDotIcon}>
-            <EvilIcons name="navicon" size={24} color="white" />
+            <AntDesign name="ellipsis1" size={24} color="white" />
           </View>
         </View>
         {
@@ -54,26 +63,7 @@ export default function Pool() {
             }} size="large" color="white" />
           )
         }
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <Pressable style={styles.modalBackdrop} onPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                {sortOptions.map((option, index) => (
-                  <Pressable key={index} onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.modalOption}>{option}</Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-          </Pressable>
-        </Modal>
+   
       </View>
     </SafeAreaView>
   );
@@ -86,6 +76,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
+  },
+  expandableContainer: {
+    width: '100%',
+    marginHorizontal: 20,
   },
   boxCont: {
     paddingHorizontal: 20,
@@ -138,9 +132,9 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   threeDotIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    right:0,
     width: '10%',
+    position: 'absolute',
   },
   modalBackdrop: {
     flex: 1,

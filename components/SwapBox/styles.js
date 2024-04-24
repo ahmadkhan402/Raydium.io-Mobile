@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
       width: 24,
       height: 24,
     },
-    connectWalletButton: {
+  connectWalletButton: {
+      bottom:40,
       paddingVertical: 12,
       borderRadius: 10,
       elevation:40,

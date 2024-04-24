@@ -1,118 +1,59 @@
-
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, SafeAreaView } from 'react-native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import RadioButton from '../../../components/RadioButton';
 import styles from './styles';
 import Header from '../../../components/header';
-import { LinearGradient } from 'expo-linear-gradient';
-import SwapBoxContainer from '../../../components/SwapBox';
 import LiquidityBoxContainer from '../../../components/LiquidityBox';
-import { useNavigation } from '@react-navigation/native';
 import ScreenNames from '../../../routes/route';
-import { useEffect } from 'react';
 
 export default function Liquidity() {
+  const ScreenName = ScreenNames.LIQUIDITY;
   const navigation = useNavigation();
-  const [selectedOption, setSelectedOption] = useState('liquidity');
+  const isFocused = useIsFocused();
+  const [selectedOption, setSelectedOption] = useState('');
+
   useEffect(() => {
-    const navUpdate = async () => await setSelectedOption('liquidity')
-    navUpdate();
+    if (isFocused) {
+      setSelectedOption('liquidity');
+    }
+  }, [isFocused]);
 
-  },[navigation])
-
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
-  };
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
-      <Header />
+      <Header title={ScreenName} />
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {/* Radio Buttons */}
         <View style={styles.radioButtonContainer}>
           {/* Swap Radio Button */}
-          {selectedOption === 'swap' ? (
-            <LinearGradient
-              colors={["#aadefe", "#0993ecd9"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={[
-                styles.radioButton,
-                selectedOption === 'swap' && styles.radioButton,
-              ]}
-            >
-              {/* Liquidity Radio Button */}
-              <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.LIQUIDITY)}>
-                <Text
-                  style={[
-                    styles.radioButtonText,
-                    selectedOption === 'swap' && styles.checkedRadioButtonText,
-                  ]}
-                >
-                  Swap
-                </Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) : (
-            <TouchableOpacity
-              style={[styles.radioButton]}
-              onPress={() => handleOptionChange('swap')}>
-              <Text
-                style={[styles.radioButtonText, selectedOption === 'swap' && styles.checkedRadioButtonText]}>
-                Swap
-              </Text>
-            </TouchableOpacity>
-          )}
+          <RadioButton
+            label="Swap"
+            selected={selectedOption === 'swap'}
+            navigateTo={() => {
+              setSelectedOption('swap');
+              navigation.navigate(ScreenNames.SWAP);
+            }}
+            gradientColors={selectedOption === 'swap' ? ["#aadefe", "#0993ecd9"] : null}
+            style={styles.radioButton}
+          />
 
           {/* Liquidity Radio Button */}
-          {selectedOption === 'liquidity' ? (
-            <LinearGradient
-              colors={["#aadefe", "#0993ecd9"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={[
-                styles.radioButton,
-                selectedOption === 'liquidity' && styles.radioButton,
-              ]}
-            >
-              {/* Liquidity Radio Button */}
-              <TouchableOpacity onPress={() => handleOptionChange('liquidity')}>
-                <Text
-                  style={[
-                    styles.radioButtonText,
-                    selectedOption === 'liquidity' && styles.checkedRadioButtonText,
-                  ]}
-                >
-                  Liquidity
-                </Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) : (
-            <TouchableOpacity
-              style={[styles.radioButton]}
-              onPress={() => handleOptionChange('liquidity')}>
-              <Text
-                style={[styles.radioButtonText, selectedOption === 'liquidity' && styles.checkedRadioButtonText]}>
-                Liquidity
-              </Text>
-            </TouchableOpacity>
-          )}
+          <RadioButton
+            label="Liquidity"
+            selected={selectedOption === 'liquidity'}
+            navigateTo={() => setSelectedOption('liquidity')}
+            gradientColors={selectedOption === 'liquidity' ? ["#aadefe", "#0993ecd9"] : null}
+            style={styles.radioButton}
+          />
         </View>
 
         {/* Box Container */}
-
-        {selectedOption === 'swap' ? (
-          <View style={styles.boxCont}>
-            <SwapBoxContainer />
-          </View>
-        ) : (
-          <View style={styles.boxCont}>
-            <LiquidityBoxContainer />
-          </View>
-        )}
-
-
+        <View style={styles.boxCont}>
+          <LiquidityBoxContainer />
+        </View>
       </ScrollView>
     </SafeAreaView>
-  )
+  );
 }

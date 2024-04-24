@@ -107,10 +107,11 @@ export default function Consentrated() {
   const [sorted, setSorted] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleSortOptionSelect = (option) => {
     setSorted(option);
-    setModalVisible(false);
+    setIsExpanded(false);
   };
 
   const data = [{
@@ -142,11 +143,21 @@ export default function Consentrated() {
               style={styles.searchInput}
             />
           </View>
-          <TouchableOpacity style={styles.sortDropDown} onPress={() => setModalVisible(true)}>
-            <Text style={styles.sortText}>Sort by: {sorted}</Text>
-          </TouchableOpacity>
+          <View style={styles.expandableContainer}>
+            <TouchableOpacity style={styles.sortDropDown} onPress={() => setIsExpanded(true)}>
+              <Text style={styles.sortText}>Sort by: {sorted}</Text>
+            </TouchableOpacity>
+            {
+              isExpanded ?
+                sortOptions.map((option, index) => (
+                  <TouchableOpacity key={index} onPress={() => handleSortOptionSelect(option)}>
+                    <Text style={styles.modalOption}>{option}</Text>
+                  </TouchableOpacity>
+                )) : null
+            }
+          </View>
           <View style={styles.threeDotIcon}>
-            <EvilIcons name="navicon" size={24} color="white" />
+            <AntDesign name="ellipsis1" size={24} color="white" />
           </View>
         </View>
         {data ? (
@@ -158,26 +169,7 @@ export default function Consentrated() {
         ) : (
           <ActivityIndicator style={{ flex: 1 }} size="large" color="white" />
         )}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <Pressable style={styles.modalBackdrop} onPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                {sortOptions.map((option, index) => (
-                  <Pressable key={index} onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.modalOption}>{option}</Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-          </Pressable>
-        </Modal>
+   
       </View>
     </SafeAreaView>
   );
@@ -192,6 +184,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 20,
+  },
+  expandableContainer: {
+    width: '100%',
+    marginHorizontal: 20,
   },
   TVL_VolumeContainerText: {
     color: 'white',
@@ -254,13 +250,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     width: '100%',
   },
-  modalContent: {
-    padding: 20,
-  },
-  modalOption: {
-    paddingVertical: 10,
-    fontSize: 16,
-  },
+
   listItemContainer: {
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
@@ -282,7 +272,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginRight: 10,
-    flexDirection:'row'
+    flexDirection: 'row',
+    gap:-7
   },
   projectName: {
     fontWeight: 'bold',

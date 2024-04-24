@@ -52,14 +52,15 @@ const [sortValue, setSorted] = useState(sortOptions[0]);
       
       <View style={styles.rightSection}>
               <View style={styles.versTxContainer}>
-                  <Text style={styles.versTxText}>Vers. Tx</Text>
+                 
                   <TouchableOpacity
                       style={[styles.switchButton, isChecked && styles.switchButtonOn]}
                       onPress={toggleSwitch}
                   >
                   {/* isChecked && styles.switchInnerCircleOn */}
                       <View style={[styles.switchInnerCircle ]} />
-                  </TouchableOpacity>
+          </TouchableOpacity>
+          <Text style={styles.versTxText}>Vers. Tx</Text>
               </View>
               <TouchableOpacity style={styles.walletButton}>
                   <Image
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     padding: 20,
     // backgroundColor: '#0c0927',
     borderRadius: 10,
+    height: 75
   },
   linearGradient: {
     flex: 1
@@ -125,20 +127,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
+    marginLeft: 25
   },
   rightSection: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   versTxContainer: {
-    flexDirection: 'row',
+    top: 5,
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: 5,
   },
   versTxText: {
     color: '#abc4ff80',
-    fontSize: 12,
-    marginRight: 5,
+    fontSize: 10,
+    top:2
   },
   switchButton: {
     padding: 5,
@@ -155,6 +158,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: color.menuColor,
+    margin: 5,
   },
   switchButton: {
     width: 40,

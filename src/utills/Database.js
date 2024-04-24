@@ -54,3 +54,6 @@ itembg2:"rgba(59, 208, 216, 0)"
 "#18337d",'#192f6a'
 
 export default color;
+
+
+
