@@ -9,7 +9,7 @@ import Pool from '../../src/screens/Pool';
 import styles from './styles';
 import Liquidity from '../../src/screens/liquidity';
 import Consentrated from '../../src/screens/consentrated';
-
+import Farms from '../../src/screens/farm';
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
@@ -73,8 +73,8 @@ export default function DrawerNavigator() {
         <Drawer.Screen name={ScreenNames.SWAP} component={ReydiamIndex} />
         <Drawer.Screen name={ScreenNames.LIQUIDITY} component={Liquidity} />
         <Drawer.Screen name={ScreenNames.CONCENTRATED} component={Consentrated} />
-
         <Drawer.Screen name={ScreenNames.POOL} component={Pool} />
+        <Drawer.Screen name={ScreenNames.FARMS} component={Farms} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

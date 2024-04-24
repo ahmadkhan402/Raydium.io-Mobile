@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     padding: 20,
     // backgroundColor: '#0c0927',
     borderRadius: 10,
-    height: 75
+    height: 75,
   },
   linearGradient: {
     flex: 1
