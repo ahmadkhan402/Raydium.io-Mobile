@@ -7,16 +7,22 @@ import { useNavigation } from '@react-navigation/native';
 import ScreenNames from '../../../routes/route';
 import { LinearGradient } from 'expo-linear-gradient';
 import color from '../../utills/Database';
+import colors from '../../utills/RecommendedColors'
 // ListItem Component
 const ListItem = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
-
+const nav = useNavigation()
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <TouchableOpacity onPress={toggleExpand}>
+    <TouchableOpacity style={{
+      marginVertical: 10,
+      borderRadius: 10,
+      width: '100%',
+      backgroundColor: colors.blueViolet[1600],
+    }} onPress={toggleExpand}>
       <View style={styles.containerExpand}>
         <View>
           <AntDesign name={'star'} size={16} color="yellow" />
@@ -90,7 +96,11 @@ const ListItem = ({ item }) => {
                 <TouchableOpacity >
                   <Text style={styles.connectWalletButtonText}>Create position</Text>
                 </TouchableOpacity>
+               
               </LinearGradient>
+              <TouchableOpacity onPress={()=> nav.navigate(ScreenNames.SWAP)} style={styles.swapButton} >
+                <AntDesign name="swap" size={18} color="white" />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -150,15 +160,15 @@ export default function Consentrated() {
             {
               isExpanded ?
                 sortOptions.map((option, index) => (
-                  <TouchableOpacity key={index} onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.modalOption}>{option}</Text>
+                  <TouchableOpacity style={styles.sortDropDown} key={index} onPress={() => handleSortOptionSelect(option)}>
+                    <Text style={styles.sortText}>{option}</Text>
                   </TouchableOpacity>
                 )) : null
             }
           </View>
-          <View style={styles.threeDotIcon}>
+           <View style={styles.threeDotIcon}>
             <AntDesign name="ellipsis1" size={24} color="white" />
-          </View>
+          </View> 
         </View>
         {data ? (
           <FlatList
@@ -178,7 +188,7 @@ export default function Consentrated() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0c0927',
+    backgroundColor: colors.blueViolet[1200]
   },
   TVL_VolumeContainer: {
     flexDirection: 'row',
@@ -205,6 +215,159 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginTop: 0,
     marginBottom: 15,
+  },
+  expandableContainer:
+  {
+    width: '100%',
+    marginHorizontal: 20,
+  },
+ 
+ 
+
+  modalBackdrop: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    width: '100%',
+  },
+
+  listItemContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
+    padding: 15,
+  },
+  listItemTitle: {
+    color: 'white',
+  },
+ 
+  containerExpand: { 
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    gap: 10,
+    justifyContent: 'space-around'
+  },
+  imageContainer: {
+    marginRight: 10,
+    flexDirection: 'row',
+    gap:-7
+  },
+  projectName: {
+    fontWeight: 'bold',
+    color: 'gray',
+  },
+  fee: {
+    color: 'gray',
+  },
+  rewardContainer: {
+    alignItems: 'center',
+    
+  },
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'gray',
+  },
+
+  separator: {
+    height: 1,
+    backgroundColor: 'gray',
+    marginVertical: 10,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
+  columnContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 5,
+  },
+  ButtonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    padding: 10,
+  },
+  connectWalletButton: {
+    paddingVertical: 12,
+    borderRadius: 10,
+    elevation: 40,
+    borderRightWidth: 0.1,
+    borderLeftWidth: 0.1,
+    borderBottomWidth: 0.1,
+    borderTopWidth: 0.1,
+    borderColor: "#58f3cd",
+    alignItems: 'center',
+    paddingHorizontal: 20,
+
+  },
+  swapButton: {
+    marginHorizontal:5,
+    paddingVertical: 12,
+    borderRadius: 10,
+    elevation: 40,
+    borderRightWidth: 0.1,
+    borderLeftWidth: 0.1,
+    borderBottomWidth: 0.1,
+    borderTopWidth: 0.1,
+    borderColor: "#58f3cd",
+    alignItems: 'center',
+    paddingHorizontal: 20,
+
+  },
+  connectWalletButtonText: {
+    color: color.menuColor,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  expandedItemText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
+    textAlign: 'flex-start',
+  },
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0c0927',
+  },
+  contentContainer: {
+    flexGrow: 1,
+  },
+  expandableContainer: {
+    width: '100%',
+    marginHorizontal: 20,
+  },
+  boxCont: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderColor: 'gray',
+    borderWidth: 1,
+    flex: 1,
+    marginHorizontal: 20,
+    borderRadius: 25,
+    marginTop: 0,
+    marginBottom: 15,
+  },
+  TVL_VolumeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+  },
+  TVL_VolumeContainerText: {
+    color: 'white',
+  },
+  TVL_VolumeContainerTextTitle: {
+    color: 'gray',
   },
   searchSortBox: {
     flexDirection: 'row',
@@ -235,103 +398,9 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   threeDotIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    right: 0,
     width: '10%',
-  },
-  modalBackdrop: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    width: '100%',
+    position: 'absolute',
   },
 
-  listItemContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    padding: 15,
-  },
-  listItemTitle: {
-    color: 'white',
-  },
-  expandedContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    padding: 10,
-  },
-  containerExpand: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    gap: 10,
-    justifyContent: 'space-around'
-  },
-  imageContainer: {
-    marginRight: 10,
-    flexDirection: 'row',
-    gap:-7
-  },
-  projectName: {
-    fontWeight: 'bold',
-    color: 'gray',
-  },
-  fee: {
-    color: 'gray',
-  },
-  rewardContainer: {
-    alignItems: 'center',
-    
-  },
-  label: {
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: 'gray',
-  },
-  expandedContainer: {
-    padding: 10,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: 'gray',
-    marginVertical: 10,
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 10,
-  },
-  columnContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 5,
-  },
-  ButtonContainer: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-    padding: 10,
-  },
-  connectWalletButton: {
-    paddingVertical: 12,
-    borderRadius: 10,
-    elevation: 40,
-    borderRightWidth: 0.1,
-    borderLeftWidth: 0.1,
-    borderBottomWidth: 0.1,
-    borderTopWidth: 0.1,
-    borderColor: "#58f3cd",
-    alignItems: 'center',
-    paddingHorizontal: 20,
-
-  },
-  connectWalletButtonText: {
-    color: color.menuColor,
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
 });
