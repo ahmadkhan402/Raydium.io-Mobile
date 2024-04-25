@@ -35,17 +35,19 @@ const styles = StyleSheet.create({
   },
   radioButtonContainer: {
     alignSelf: "center",
-    width: "50%",
+    
     flexDirection: 'row',
     marginVertical: 5,
     backgroundColor: '#1f273f',
-    borderRadius: 30,
+    borderRadius: 20,
+    justifyContent: 'center',
   },
   radioButton: {
     flex: 1,
     alignItems: 'center',
     paddingVertical: 8,
-    borderRadius: 30,
+    padding:10,
+    borderRadius: 20,
   },
   // checkedRadioButton: {
   //   backgroundColor: '#3B82F6',
