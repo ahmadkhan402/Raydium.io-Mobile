@@ -1,5 +1,4 @@
 const ScreenNames = {
-  CONNECTWALLET: "ConnectWallet",
   SWAP: "Swap",
   LIQUIDITY: "Liquidity",
   ROUTE: "Route",
@@ -8,6 +7,8 @@ const ScreenNames = {
   FARMS: "Farms",
   STAKING: "Staking",
   ACCELERAYTOR: "AcceleRaytor",
+  WALLET_CONNECT: "WalletConnect",
+
 
   };
   
