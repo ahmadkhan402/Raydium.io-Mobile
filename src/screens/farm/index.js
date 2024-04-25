@@ -222,9 +222,9 @@ export default function Farms() {
                 )) : null
             }
           </View>
-          <View style={styles.threeDotIcon}>
+          <TouchableOpacity style={styles.threeDotIcon}>
             <AntDesign name="ellipsis1" size={24} color="white" />
-          </View>
+          </TouchableOpacity>
         </View>
         {data ? (
           <FlatList
@@ -458,9 +458,11 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   threeDotIcon: {
+    top:5,
     right: 0,
     width: '10%',
     position: 'absolute',
+    transform: [{ rotate: '90deg' }],
   },
 
 });
