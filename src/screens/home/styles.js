@@ -32,20 +32,23 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       paddingBottom: 20,
     },
-    radioButtonContainer: {
-        alignSelf:"center",
-        width:"50%",
-      flexDirection: 'row',
-      marginVertical:5,
-      backgroundColor: '#1f273f',
-      borderRadius: 30,
-    },
-    radioButton: {
-      flex: 1,
-      alignItems: 'center',
-      paddingVertical: 8,
-      borderRadius: 30,
-    },
+  radioButtonContainer: {
+    alignSelf: "center",
+
+    flexDirection: 'row',
+    marginVertical: 5,
+    backgroundColor: '#1f273f',
+    borderRadius: 20,
+    justifyContent: 'center',
+   
+  },
+  radioButton: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 8,
+    padding: 10,
+    borderRadius: 20,
+  },
     // checkedRadioButton: {
     //   backgroundColor: '#3B82F6',
     // },
