@@ -112,13 +112,12 @@ const nav = useNavigation()
 };
 
 export default function Consentrated() {
-  //get screen name
   const ScreenName = ScreenNames.CONCENTRATED
   const [sorted, setSorted] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
   const [isExpanded, setIsExpanded] = useState(false);
 
+  
   const handleSortOptionSelect = (option) => {
     setSorted(option);
     setIsExpanded(false);
@@ -166,9 +165,11 @@ export default function Consentrated() {
                 )) : null
             }
           </View>
-           <View style={styles.threeDotIcon}>
-            <AntDesign name="ellipsis1" size={24} color="white" />
-          </View> 
+           <TouchableOpacity style={styles.threeDotIcon}>
+            <AntDesign style={{
+              transform: [{ rotate: '90deg' }],
+            }} name="ellipsis1" size={20} color="white" />
+          </TouchableOpacity> 
         </View>
         {data ? (
           <FlatList
@@ -398,6 +399,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   threeDotIcon: {
+    top: 8,
     right: 0,
     width: '10%',
     position: 'absolute',
