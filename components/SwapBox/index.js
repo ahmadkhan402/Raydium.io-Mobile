@@ -90,16 +90,16 @@ export default function SwapBoxContainer() {
                 </TouchableOpacity>
 
                 <CoinInput coinInfo={coinTo} />
+                <TouchableOpacity>
                 <LinearGradient
+                    style={styles.connectWalletButton}
                     colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
-                    style={styles.connectWalletButton}
-                >
-                    <TouchableOpacity>
+                    >
                         <Text style={styles.connectWalletButtonText}>Connect Wallet</Text>
-                    </TouchableOpacity>
                 </LinearGradient>
+                    </TouchableOpacity>
             </View>
         </LinearGradient>
     );

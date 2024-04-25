@@ -62,7 +62,7 @@ const [sortValue, setSorted] = useState(sortOptions[0]);
           </TouchableOpacity>
           <Text style={styles.versTxText}>Vers. Tx</Text>
               </View>
-              <TouchableOpacity style={styles.walletButton}>
+        <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.WALLET_CONNECT)} style={styles.walletButton}>
                   <Image
                       source={require('./../../assets/wallet.png')}
             style={styles.icon}

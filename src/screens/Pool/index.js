@@ -132,9 +132,11 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   threeDotIcon: {
+    top:5,
     right:0,
     width: '10%',
     position: 'absolute',
+    transform: [{rotate:'90deg'}]
   },
   modalBackdrop: {
     flex: 1,
