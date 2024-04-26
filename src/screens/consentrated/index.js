@@ -1,115 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
-import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { StyleSheet, View, SafeAreaView, Text, TextInput, TouchableOpacity,  ActivityIndicator } from 'react-native';
+import { AntDesign} from '@expo/vector-icons';
 import Header from '../../../components/header';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ScreenNames from '../../../routes/route';
-import { LinearGradient } from 'expo-linear-gradient';
 import color from '../../utills/Database';
 import colors from '../../utills/RecommendedColors'
-// ListItem Component
-const ListItem = ({ item }) => {
-  const [expanded, setExpanded] = useState(false);
-const nav = useNavigation()
-  const toggleExpand = () => {
-    setExpanded(!expanded);
-  };
-
-  return (
-    <TouchableOpacity style={{
-      marginVertical: 10,
-      borderRadius: 10,
-      width: '100%',
-      backgroundColor: colors.blueViolet[1600],
-    }} onPress={toggleExpand}>
-      <View style={styles.containerExpand}>
-        <View>
-          <AntDesign name={'star'} size={16} color="yellow" />
-        </View>
-        <View>
-          {/* Images */}
-          <View style={styles.imageContainer}>
-            {/* Placeholder icon if image is not present */}
-            <AntDesign name={'questioncircleo'} size={18} color="gray" />
-            <AntDesign name={'questioncircleo'} size={18} color="gray" />
-
-          </View>
-          {/* projectsName */}
-          <View>
-            <Text style={styles.projectName}>{item.projectName1}-{item.projectName2}</Text>
-            <Text style={styles.fee}>{item.fee}</Text>
-          </View>
-        </View>
-        {/* reward */}
-        <View>
-          <Text style={styles.label}>Rewards</Text>
-          <View style={styles.rewardContainer}>
-            {/* Reward image */}
-            <AntDesign name={'questioncircleo'} size={18} color="gray" />
-          </View>
-        </View>
-        {/* apr */}
-        <View>
-          <Text style={styles.label}>APR(7D)</Text>
-          <Text style={styles.label} >{item.apr}</Text>
-        </View>
-        <View>
-          <AntDesign name={expanded ? 'caretup' : 'caretdown'} size={18} color="gray" />
-        </View>
-      </View>
-      {expanded && (
-        <View style={styles.expandedContainer}>
-          <View style={styles.separator} />
-          <View style={styles.rowContainer}>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Liquidity</Text>
-              <Text style={styles.label}>{item.liquidity}</Text>
-            </View>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Volume</Text>
-              <Text style={styles.label} >{item.volume}</Text>
-            </View>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Fees</Text>
-              <Text style={styles.label} >{item.fees}</Text>
-            </View>
-          </View>
-          <View style={{
-            marginVertical: 10,
-            alignItems: 'center',
-            width: '100%',
-          }} >
-            <Text style={{
-              color: 'gray',
-              fontSize: 16,
-              marginBottom: 10,
-              fontWeight: 'bold',
-            }}>Want to open new position?</Text>
-            <View style={styles.ButtonContainer}>
-              <LinearGradient
-                colors={["rgba(59, 208, 216, .2)", 'rgba(59, 208, 216, 0)']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.connectWalletButton}
-              >
-                <TouchableOpacity >
-                  <Text style={styles.connectWalletButtonText}>Create position</Text>
-                </TouchableOpacity>
-               
-              </LinearGradient>
-              <TouchableOpacity onPress={()=> nav.navigate(ScreenNames.SWAP)} style={styles.swapButton} >
-                <AntDesign name="swap" size={18} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-        </View>
-      )}
-    </TouchableOpacity>
-  );
-
-};
+import { ListItem } from './ListItem';
 
 export default function Consentrated() {
   const ScreenName = ScreenNames.CONCENTRATED
@@ -123,18 +21,30 @@ export default function Consentrated() {
     setIsExpanded(false);
   };
 
-  const data = [{
+const data = [{
     id: 1, projectName1: "SOL", projectName2: "USDC", stared: false, rewards: [{
       reward1: "SOL",
     }, {
       reward2: "USDC",
     }],
-    apr: "0.00%",
+    apr: "--",
     fee: "0.00%",
     liquidity: "$0.00",
     volume: "$0.00",
     fees: "$0.00",
-  }]
+  },
+    {
+      id: 1, projectName1: "SOL", projectName2: "USDC", stared: false, rewards: [{
+        reward1: "SOL",
+      }, {
+        reward2: "USDC",
+      }],
+      apr: "--",
+      fee: "0.00%",
+      liquidity: "$0.00",
+      volume: "$0.00",
+      fees: "$0.00",
+    }]
 
   return (
     <SafeAreaView style={styles.container}>
@@ -186,6 +96,8 @@ export default function Consentrated() {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -217,36 +129,12 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 15,
   },
-  expandableContainer:
-  {
-    width: '100%',
-    marginHorizontal: 20,
-  },
- 
- 
-
-  modalBackdrop: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    width: '100%',
-  },
-
   listItemContainer: {
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
     padding: 15,
   },
-  listItemTitle: {
-    color: 'white',
-  },
- 
-  containerExpand: { 
+  containerExpand: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
@@ -256,7 +144,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginRight: 10,
     flexDirection: 'row',
-    gap:-7
+    gap: -7
   },
   projectName: {
     fontWeight: 'bold',
@@ -267,14 +155,12 @@ const styles = StyleSheet.create({
   },
   rewardContainer: {
     alignItems: 'center',
-    
   },
   label: {
     fontWeight: 'bold',
     marginBottom: 5,
     color: 'gray',
   },
-
   separator: {
     height: 1,
     backgroundColor: 'gray',
@@ -284,11 +170,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 10,
-  },
-  columnContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 5,
   },
   ButtonContainer: {
     flexDirection: 'row',
@@ -309,10 +190,9 @@ const styles = StyleSheet.create({
     borderColor: "#58f3cd",
     alignItems: 'center',
     paddingHorizontal: 20,
-
   },
   swapButton: {
-    marginHorizontal:5,
+    marginHorizontal: 5,
     paddingVertical: 12,
     borderRadius: 10,
     elevation: 40,
@@ -323,7 +203,6 @@ const styles = StyleSheet.create({
     borderColor: "#58f3cd",
     alignItems: 'center',
     paddingHorizontal: 20,
-
   },
   connectWalletButtonText: {
     color: color.menuColor,
@@ -336,39 +215,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'flex-start',
   },
-
-  container: {
-    flex: 1,
-    backgroundColor: '#0c0927',
-  },
   contentContainer: {
     flexGrow: 1,
-  },
-  expandableContainer: {
-    width: '100%',
-    marginHorizontal: 20,
-  },
-  boxCont: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    borderColor: 'gray',
-    borderWidth: 1,
-    flex: 1,
-    marginHorizontal: 20,
-    borderRadius: 25,
-    marginTop: 0,
-    marginBottom: 15,
-  },
-  TVL_VolumeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 20,
-  },
-  TVL_VolumeContainerText: {
-    color: 'white',
-  },
-  TVL_VolumeContainerTextTitle: {
-    color: 'gray',
   },
   searchSortBox: {
     flexDirection: 'row',
@@ -404,5 +252,4 @@ const styles = StyleSheet.create({
     width: '10%',
     position: 'absolute',
   },
-
 });
