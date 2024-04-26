@@ -165,8 +165,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: wp('1.5%'), // Responsive border radius
-    margin: wp('0.5%'), // Responsive margin
-    height: hp('6%'), // Responsive height
+    margin: wp('4%'), // Responsive margin
+    height: hp('5%'), // Responsive height
+    marginTop: hp('2.5%'), // Responsive margin
   },
   headerSelectedText: {
     fontSize: wp('4%'), // Responsive font size
