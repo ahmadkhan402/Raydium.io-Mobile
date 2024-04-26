@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, ScrollView, SafeAreaView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import RadioButton from '../../../components/RadioButton';
-import styles from './styles';
 import Header from '../../../components/header';
 import LiquidityBoxContainer from '../../../components/LiquidityBox';
 import ScreenNames from '../../../routes/route';
 import colors from '../../utills/RecommendedColors';
 import color from '../../utills/Database';
-import { height, width } from "../../utills/Dimention";
 import { LinearGradient } from 'expo-linear-gradient';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export default function Liquidity() {
   const ScreenName = ScreenNames.LIQUIDITY;
   const navigation = useNavigation();
@@ -56,34 +57,34 @@ export default function Liquidity() {
         <View style={styles.boxCont}>
           <LiquidityBoxContainer />
         </View>
-        <View style={styless.LabelContainer}>
-          <Text style={[styless.LiquidityLabel]}>Your Liquidity</Text>
+        <View style={styles.LabelContainer}>
+          <Text style={styles.LiquidityLabel}>Your Liquidity</Text>
         </View>
-        <View style={[styless.LiquidityContainer, { flex: 1 }]}>
-          <View style={[styless.LiquidityBox]}>
-            <Text style={[styless.LiquidityBoxText]}>
+        <View style={[styles.LiquidityContainer, { flex: 1 }]}>
+          <View style={styles.LiquidityBox}>
+            <Text style={styles.LiquidityBoxText}>
               If you staked your LP tokens in a farm, unstake them to see them here
             </Text>
           </View>
         </View>
-        <View style={styless.LabelContainer}>
-          <Text style={[styless.LiquidityLabel]}>Create Pool</Text>
+        <View style={styles.LabelContainer}>
+          <Text style={styles.LiquidityLabel}>Create Pool</Text>
         </View>
-        <View style={[styless.PoolContainer, { flex: 1 }]}>
-          <View style={[styless.PoolBox]}>
+        <View style={[styles.PoolContainer, { flex: 1 }]}>
+          <View style={styles.PoolBox}>
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={[styless.PoolTextBox]}>
+              <Text style={styles.PoolTextBox}>
                 Create a liquidity pool on Raydium that can be traded on swap interface.
               </Text>
             </View>
-            <TouchableOpacity style={styless.PoolButton}>
+            <TouchableOpacity style={styles.PoolButton}>
               <LinearGradient
-                style={styless.connectWalletButton}
+                style={styles.connectWalletButton}
                 colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
               >
-                <Text style={styless.connectWalletButtonText}>+  Create Pool</Text>
+                <Text style={styles.connectWalletButtonText}>+  Create Pool</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -93,88 +94,112 @@ export default function Liquidity() {
   );
 }
 
-const styless = StyleSheet.create({
-  boxContainer: {
-    alignItems: 'center', // Center horizontally
-    justifyContent: 'center', // Center vertically
-    marginTop: 20, // Add any margin as needed
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0c0927',
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp('2%'),
+  },
+  radioButtonContainer: {
+    alignSelf: "center",
+    flexDirection: 'row',
+    marginVertical: hp('1%'),
+    backgroundColor: '#1f273f',
+    borderRadius: wp('5%'),
+    justifyContent: 'center',
+  },
+  radioButton: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: hp('1%'),
+    padding: wp('2%'),
+    borderRadius: wp('5%'),
+  },
+  boxCont: {
+    alignItems: "center",
+    justifyContent: 'center',
+    marginTop: hp('2%'),
+  },
+  LabelContainer: {
+    marginVertical: hp('1.5%'),
+    marginLeft: wp('6.5%'),
+    alignSelf: 'flex-start',
+  },
+  LiquidityLabel: {
+    fontSize: RFValue(18),
+    fontWeight: 'bold',
+    marginBottom: hp('1%'),
+    color: 'white',
   },
   LiquidityContainer: {
     alignItems: 'center',
   },
-  PoolContainer: {
-    alignItems: 'center',
-  },
-  LabelContainer: {
-    marginVertical: 15,
-    marginLeft: 25,
-    alignSelf: 'flex-start',
-  },
-  LiquidityLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: 'white',
-  },
   LiquidityBox: {
     backgroundColor: color.primaryColor,
-    borderRadius: 20,
-    padding: 20,
-    width: "90%",
-    borderRightWidth: 0.4,
+    borderRadius: wp('5%'),
+    padding: hp('2%'),
+    width: wp('90%'),
+    borderRightWidth: wp('0.4%'),
     borderRightColor: color.colorFuchsia,
-    elevation: 20,
-    borderTopWidth: 3,
+    elevation: wp('2%'),
+    borderTopWidth: hp('0.3%'),
     borderTopColor: "rgba(59, 208, 216, .2)",
   },
   LiquidityBoxText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
-  connectWalletButton: {
-    bottom: 10,
-    padding: 20,
-    borderRadius: 10,
-    elevation: 40,
-    borderRightWidth: 0.1,
-    borderLeftWidth: 0.1,
-    borderBottomWidth: 0.1,
-    borderTopWidth: 0.1,
-    borderColor: "#58f3cd",
+  PoolContainer: {
     alignItems: 'center',
-
   },
   PoolBox: {
     flexDirection: 'row',
     backgroundColor: color.primaryColor,
-    borderRadius: 20,
-    padding: 20,
-    width: "90%",
-    borderRightWidth: 0.4,
+    borderRadius: wp('5%'),
+    padding: hp('2%'),
+    width: wp('90%'),
+    borderRightWidth: wp('0.4%'),
     borderRightColor: color.colorFuchsia,
-    elevation: 20,
-    borderTopWidth: 3,
+    elevation: wp('2%'),
+    borderTopWidth: hp('0.3%'),
     borderTopColor: "rgba(59, 208, 216, .2)",
-    alignItems: 'center', // Center vertically
-    justifyContent: 'space-between', // Space between horizontally
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   PoolTextBox: {
     color: 'white',
-    fontSize: 12,
-    flex: 1, // Take up available space
+    fontSize: RFValue(12),
+    flex: 1,
   },
   PoolButton: {
-    backgroundColor: color.primaryColor, // Same background color as the box
-    borderRadius: 20,
-    marginLeft:10,
-    paddingVertical: 12,
-    paddingHorizontal: 20, // Add some padding to the button
-    alignItems: 'center', // Center horizontally
-    justifyContent: 'center', // Center vertically
+    backgroundColor: color.primaryColor,
+    borderRadius: wp('5%'),
+    marginLeft: wp('1%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('5%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  connectWalletButton: {
+    bottom: hp('0.5%'),
+    padding: hp('2%'),
+    borderRadius: wp('3%'),
+    elevation: wp('4%'),
+    borderRightWidth: wp('0.1%'),
+    borderLeftWidth: wp('0.1%'),
+    borderBottomWidth: wp('0.1%'),
+    borderTopWidth: wp('0.1%'),
+    borderColor: "#58f3cd",
+    alignItems: 'center',
+
   },
   connectWalletButtonText: {
     color: color.menuColor,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
 });
