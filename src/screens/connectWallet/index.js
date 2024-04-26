@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function ConnectWallet() {
   const [phrase, setPhrase] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-const navigation = useNavigation();
+  const navigation = useNavigation();
+
   const handleConnectWallet = () => {
     if (validatePhrase(phrase)) {
-      // Here you can save the phrase to SQL database
-      // For now, let's just log it
       console.log("Phrase:", phrase);
-      navigation.navigate("Main")
-
-      // You can navigate to another screen after saving the phrase if needed
-      // navigation.navigate(ScreenNames.SomeOtherScreen);
+      navigation.navigate("Main");
     } else {
       setErrorMessage('Please enter a valid phrase.');
     }
@@ -32,11 +28,7 @@ const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-   
-      {/* Main Content */}
       <View style={styles.contentContainer}>
-        {/* Phrase Input */}
         <View style={styles.inputSection}>
           <TextInput
             style={styles.input}
@@ -52,7 +44,6 @@ const navigation = useNavigation();
           />
           {errorMessage !== '' && <Text style={styles.errorMessage}>{errorMessage}</Text>}
         </View>
-        {/* Connect Wallet Button */}
         <TouchableOpacity
           style={styles.connectWalletButton}
           onPress={handleConnectWallet}
@@ -70,46 +61,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#0c0927',
     justifyContent: 'center',
   },
-  header: {
-    padding: 15,
-    backgroundColor: '#1f273f',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingRight: 5
-  },
-  headerText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-  },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: wp('5%'), // Responsive padding
   },
   inputSection: {
-    marginBottom: 20,
+    marginBottom: hp('3%'), // Responsive margin
   },
   input: {
     backgroundColor: '#1f273f',
     color: '#ABC4FF',
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    fontSize: 16,
+    borderRadius: wp('10%'), // Responsive border radius
+    paddingHorizontal: wp('5%'), // Responsive padding
+    paddingVertical: hp('2%'), // Responsive padding
+    fontSize: wp('4%'), // Responsive font size
   },
   connectWalletButton: {
     backgroundColor: '#34ade5',
-    borderRadius: 20,
-    paddingVertical: 12,
+    borderRadius: wp('10%'), // Responsive border radius
+    paddingVertical: hp('2%'), // Responsive padding
     alignItems: 'center',
   },
   connectWalletButtonText: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: wp('4%'), // Responsive font size
   },
   errorMessage: {
     color: 'red',
-    marginTop: 5,
+    marginTop: hp('1%'), // Responsive margin
+    fontSize: wp('4%'), // Responsive font size
   },
 });
