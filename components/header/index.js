@@ -1,73 +1,71 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity,Modal,Pressable } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, Pressable, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import ScreenNames from '../../routes/route';
-import { AntDesign, } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { AntDesign } from '@expo/vector-icons';
 import color from '../../src/utills/Database';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export default function Header({ title }) {
   const navigation = useNavigation();
-        const [isChecked, setIsChecked] = useState(false);
-        const toggleSwitch = () => {
-          setIsChecked((prev) => !prev); // Toggle the isChecked state
+  const [isChecked, setIsChecked] = useState(false);
+  const toggleSwitch = () => {
+    setIsChecked((prev) => !prev); // Toggle the isChecked state
   };
   const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
-const [sortValue, setSorted] = useState(sortOptions[0]);
+  const [sortValue, setSorted] = useState(sortOptions[0]);
+
   const handleSortOptionSelect = (option) => {
     setSorted(option);
     setModalVisible(false);
   };
+
   return (
-   
     <LinearGradient
-   colors={[  "rgba(59, 208, 216, .2)",'#192f6a']} 
-      start={{ x: 0, y: 0 }} 
-      end={{ x: 1, y: 0 }} 
+      colors={["rgba(59, 208, 216, .2)", '#192f6a']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
       style={styles.container}>
 
-    {/* <View style={styles.container}> */}
-      <TouchableOpacity style={styles.iconContainer} onPress={()=> navigation.openDrawer()}>
+      <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.openDrawer()}>
         <Image
           source={require('./../../assets/menu.png')}
           style={styles.icon}
         />
       </TouchableOpacity>
-      {
-        title == ScreenNames.CONCENTRATED || title == ScreenNames.FARMS ? (
-          <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.headerModelContainer}>
-            <Text style={styles.headerSelectedText}>{sortValue}</Text>
-            <AntDesign name="down" size={14} color="gray" />
-          </TouchableOpacity>
-        ) :
-          (
-            <Text style={styles.title}>{
-              title ? title : 'Swap'
-            }</Text>
-          )
-      }
 
-      
+      {title == ScreenNames.CONCENTRATED || title == ScreenNames.FARMS ? (
+        <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.headerModelContainer}>
+          <Text style={styles.headerSelectedText}>{sortValue}</Text>
+          <AntDesign name="down" size={wp('3%')} color="gray" />
+        </TouchableOpacity>
+      ) :
+        (
+          <Text style={styles.title}>
+            {title ? title : 'Swap'}
+          </Text>
+        )}
+
       <View style={styles.rightSection}>
-              <View style={styles.versTxContainer}>
-                 
-                  <TouchableOpacity
-                      style={[styles.switchButton, isChecked && styles.switchButtonOn]}
-                      onPress={toggleSwitch}
-                  >
-                  {/* isChecked && styles.switchInnerCircleOn */}
-                      <View style={[styles.switchInnerCircle ]} />
+        <View style={styles.versTxContainer}>
+          <TouchableOpacity
+            style={[styles.switchButton, isChecked && styles.switchButtonOn]}
+            onPress={toggleSwitch}
+          >
+            <View style={[styles.switchInnerCircle]} />
           </TouchableOpacity>
           <Text style={styles.versTxText}>Vers. Tx</Text>
-              </View>
+        </View>
+
         <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.WALLET_CONNECT)} style={styles.walletButton}>
-                  <Image
-                      source={require('./../../assets/wallet.png')}
+          <Image
+            source={require('./../../assets/wallet.png')}
             style={styles.icon}
           />
         </TouchableOpacity>
+
         <Modal
           animationType="slide"
           transparent={true}
@@ -89,117 +87,89 @@ const [sortValue, setSorted] = useState(sortOptions[0]);
           </Pressable>
         </Modal>
       </View>
-    {/* </View> */}
     </LinearGradient>
   );
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
-    // backgroundColor: '#0c0927',
-    borderRadius: 10,
-    height: 75,
-  },
-  linearGradient: {
-    flex: 1
+    padding: wp('3%'), // Responsive padding
+    borderRadius: wp('1.5%'), // Responsive border radius
+    height: hp('9%'), // Responsive height
   },
   iconContainer: {
-    padding: 10,
-    borderRadius: 10,
+    padding: wp('2%'), // Responsive padding
+    borderRadius: wp('1.5%'), // Responsive border radius
     backgroundColor: 'transparent',
-    borderWidth: 1,
+    borderWidth: wp('0.3%'), // Responsive border width
     borderColor: color.menuColor,
   },
   icon: {
-    width: 15,
-    height: 15,
-    tintColor: color.menuColor
+    width: wp('4%'), // Responsive width
+    height: wp('3.5%'), // Responsive height
+    tintColor: color.menuColor,
   },
   title: {
-    fontSize: 20,
+    fontSize: wp('5%'), // Responsive font size
     fontWeight: 'bold',
     color: 'white',
-    marginLeft: 25
+    marginLeft: wp('3%'), // Responsive margin
   },
   rightSection: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   versTxContainer: {
-    top: 5,
+    top: wp('0.5%'), // Responsive margin
     alignItems: 'center',
-    marginRight: 5,
+    marginRight: wp('1%'), // Responsive margin
   },
   versTxText: {
     color: '#abc4ff80',
-    fontSize: 10,
-    top:2
+    fontSize: wp('2%'), // Responsive font size
+    top: wp('0.2%'), // Responsive margin
   },
   switchButton: {
-    padding: 5,
-  },
-  switchInnerCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#39D0D8',
-  },
-  walletButton: {
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: color.menuColor,
-    margin: 5,
-  },
-  switchButton: {
-    width: 40,
-    height: 20,
-    borderRadius: 10,
+    width: wp('7%'), // Responsive width
+    height: wp('4%'), // Responsive height
+    borderRadius: wp('2%'), // Responsive border radius
     backgroundColor: '#39D0D8',
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   switchButtonOn: {
-    width: 40,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#39D0D8',
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
-
   switchInnerCircle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
+    width: wp('5%'), // Responsive width
+    height: wp('3.5%'), // Responsive height
+    borderRadius: wp('2%'), // Responsive border radius
     backgroundColor: '#ffffff',
   },
-  switchInnerCircleOn: {
-    backgroundColor: '#ffffff',
+  walletButton: {
+    padding: wp('2%'), // Responsive padding
+    borderRadius: wp('1.5%'), // Responsive border radius
+    backgroundColor: 'transparent',
+    borderWidth: wp('0.3%'), // Responsive border width
+    borderColor: color.menuColor,
+    margin: wp('0.5%'), // Responsive margin
   },
   headerModelContainer: {
     backgroundColor: '#1f273f',
-
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderRadius: 10,
-    margin:5,
-
-    height: 40,
+    borderRadius: wp('1.5%'), // Responsive border radius
+    margin: wp('0.5%'), // Responsive margin
+    height: hp('6%'), // Responsive height
   },
   headerSelectedText: {
-    fontSize:16,
+    fontSize: wp('4%'), // Responsive font size
     color: 'white',
   },
   modalBackdrop: {
@@ -209,15 +179,15 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: wp('1.5%'), // Responsive border radius
+    borderTopRightRadius: wp('1.5%'), // Responsive border radius
     width: '100%',
   },
   modalContent: {
-    padding: 20,
+    padding: wp('3%'), // Responsive padding
   },
   modalOption: {
-    paddingVertical: 10,
-    fontSize: 16,
+    paddingVertical: wp('2%'), // Responsive padding
+    fontSize: wp('4%'), // Responsive font size
   },
 });
