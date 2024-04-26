@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const RadioButton = ({ label, selected, navigateTo, gradientColors, style }) => {
   return (
@@ -39,15 +40,15 @@ RadioButton.propTypes = {
 const styles = {
   radioButton: {
     alignItems: 'center',
-    paddingVertical: 8,
-    borderRadius: 30,
+    paddingVertical: hp('1.5%'), // Adjusted padding using height percentage
+    borderRadius: wp('10%'), // Adjusted border radius using width percentage
   },
   radioButtonText: {
     color: '#ABC4FF',
-    fontSize: 12,
+    fontSize: wp('3%'), // Adjusted font size using width percentage
   },
   checkedRadioButtonText: {
-    fontSize: 12,
+    fontSize: wp('3%'), // Adjusted font size using width percentage
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
