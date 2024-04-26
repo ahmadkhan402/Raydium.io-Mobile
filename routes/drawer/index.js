@@ -6,14 +6,15 @@ import { Ionicons } from '@expo/vector-icons';
 import ScreenNames from '../route';
 import ReydiamIndex from '../../src/screens/home';
 import Pool from '../../src/screens/Pool';
-import styles from './styles';
+
 import Liquidity from '../../src/screens/liquidity';
 import Consentrated from '../../src/screens/consentrated';
 import Farms from '../../src/screens/farm';
 import Staking from '../../src/screens/stacking';
-import ConnectWallet from '../../src/screens/connectWallet';
+import AcceleRaytor from '../../src/screens/acceleRaytor';
 import Routes from '../stack';
 const Drawer = createDrawerNavigator();
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 function CustomDrawerContent(props) {
   const navigation = useNavigation();
@@ -79,7 +80,50 @@ export default function DrawerNavigator() {
         <Drawer.Screen name={ScreenNames.POOL} component={Pool} />
         <Drawer.Screen name={ScreenNames.FARMS} component={Farms} />
         <Drawer.Screen name={ScreenNames.STAKING} component={Staking} />
+        <Drawer.Screen name={ScreenNames.ACCELERAYTOR} component={AcceleRaytor} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
+import { StyleSheet } from 'react-native';
+const styles = StyleSheet.create({
+
+
+
+
+  drawerContainer: {
+    flex: 1,
+    backgroundColor: '#1f273f',
+    paddingVertical: hp('2%'), // Adjusted padding using height percentage
+    paddingHorizontal: wp('2%'), // Adjusted padding using width percentage
+  },
+  drawerTopIcon: {
+    // Style for top icon/logo
+  },
+  drawerItemsContainer: {
+    marginTop: hp('2%'), // Adjusted margin using height percentage
+  },
+  drawerItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: hp('1.5%'), // Adjusted padding using height percentage
+    paddingHorizontal: wp('3%'), // Adjusted padding using width percentage
+    borderRadius: wp('6%'), // Adjusted border radius using width percentage
+    marginBottom: hp('1%'), // Adjusted margin using height percentage
+    backgroundColor: 'rgba(57, 208, 216, 0.1)',
+  },
+  itemIconContainer: {
+    backgroundColor: 'rgba(57, 208, 216, 0.2)',
+    borderRadius: wp('8%'), // Adjusted border radius using width percentage
+    padding: wp('2%'), // Adjusted padding using width percentage
+    marginRight: wp('3%'), // Adjusted margin using width percentage
+  },
+  itemIcon: {
+    width: wp('8%'), // Adjusted icon size using width percentage
+    height: wp('8%'), // Adjusted icon size using width percentage
+  },
+  itemText: {
+    fontSize: wp('4%'), // Adjusted font size using width percentage
+    color: '#ACE3E5',
+  }
+});
