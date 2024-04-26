@@ -1,86 +1,123 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
-import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import Header from '../../../components/header';
-import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import ScreenNames from '../../../routes/route';
-import { LinearGradient } from 'expo-linear-gradient';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { RFValue } from 'react-native-responsive-fontsize';
 import color from '../../utills/Database';
-import colors from '../../utills/RecommendedColors'
-// ListItem Component
+import colors from '../../utills/RecommendedColors';
+import { LinearGradient } from 'expo-linear-gradient';
 const ListItem = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
-  const nav = useNavigation()
+
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
   return (
     <TouchableOpacity style={{
-      marginVertical: 10,
-      borderRadius: 10,
+      borderRadius: wp('5%'),
       width: '100%',
       backgroundColor: colors.blueViolet[1600],
+      marginTop: hp('0.5%')
     }} onPress={toggleExpand}>
       <View style={styles.containerExpand}>
-        <View>
-          <AntDesign name={'star'} size={16} color="yellow" />
-        </View>
-        <View>
-          {/* Images */}
-          <View style={styles.imageContainer}>
-            {/* Placeholder icon if image is not present */}
-            <AntDesign name={'questioncircleo'} size={18} color="gray" />
-            <AntDesign name={'questioncircleo'} size={18} color="gray" />
-
-          </View>
-          {/* projectsName */}
-          <View>
-            <Text style={styles.projectName}>{item.projectName1}-{item.projectName2}</Text>
-            <Text style={styles.fee}>{item.fee}</Text>
-          </View>
+        <View style={styles.pendingRewardsContainer}>
+          <AntDesign name={'questioncircleo'} size={wp('4%')} color="gray" />
+          <Text style={styles.label}>SOL</Text>
         </View>
         {/* reward */}
-        <View>
-          <Text style={styles.label}>TVL</Text>
+        <View style={styles.pendingRewardsContainer}>
+          <Text style={styles.label}>Pending</Text>
           <View style={styles.rewardContainer}>
-            {/* Reward image */}
+
+            <ActivityIndicator size="small" color="gray" />
+          </View>
+        </View>
+        <View style={styles.pendingRewardsContainer} >
+          <Text style={styles.label}>Rewards</Text>
+          <View style={styles.rewardContainer}>
+
             <ActivityIndicator size="small" color="gray" />
           </View>
         </View>
         {/* apr */}
-        <View>
-          <Text style={styles.label}>APR(7D)</Text>
-          <Text style={styles.label} >{item.apr}</Text>
+        <View style={styles.pendingRewardsContainer}>
+          <Text style={styles.label}>APR</Text>
+          <ActivityIndicator size="small" color="gray" />
         </View>
         <View>
-          <AntDesign name={expanded ? 'caretup' : 'caretdown'} size={18} color="gray" />
+          <AntDesign name={expanded ? 'caretup' : 'caretdown'} size={wp('4%')} color="gray" />
         </View>
       </View>
       {expanded && (
         <View style={styles.expandedContainer}>
-          <View style={styles.twoBoxContainer}>
-            <View style={[styles.depositContainer, {
+          <View style={styles.separator} />
+          <View style={[styles.stakeContainer, {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            gap: wp('2%')
+          }]}>
+            <View style={[styles.stackedContainer]}>
+
+              <Text style={[styles.label, {
+                color: 'gray',
+                fontSize: wp('3%'),
+                marginHorizontal: wp('1%')
+              }]} >Staked</Text>
+              <ActivityIndicator size={'small'} color="gray" />
+            </View>
+            <View style={[styles.totalStackContainer]}>
+              <View style={[styles.stackedContainer]}>
+
+                <Text style={[styles.label, {
+                  color: 'gray',
+                  fontSize: wp('3%'),
+                }]} >Total Staked</Text>
+                <ActivityIndicator size={'small'} color="gray" />
+              </View>
+            </View>
+          </View>
+          <View style={[styles.buttonsContainer, {
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.blueViolet[1600],
+          }]}>
+            <View style={[styles.DepositContainer, {
               flexDirection: 'row',
-              borderWidth: 1,
-              marginHorizontal: 10,
               justifyContent: 'space-between',
-              alignItems: 'center',
-              borderRadius: 15,
-              height: 50,
+              borderWidth: wp('0.1%'),
+              borderColor: 'gray',
+              borderRadius: wp('5%'),
+
             }]}>
-              <View style={[styles.labelVlueContainer, {
-                marginLeft: 10,
+              <View style={[styles.coinInfoContainer, {
+                marginVertical: hp('1%'),
+                marginLeft: wp('1%'),
               }]}>
-                <Text style={styles.label}>Deposit</Text>
-                <Text style={styles.value}>$0.00</Text>
+                <Text style={[styles.label, {
+                  color: 'gray',
+                  fontSize: wp('3%'),
+                }]} >Deposited</Text>
+                <Text style={[styles.CoinNameLabel, {
+                  color: 'white',
+                  fontSize: wp('4%'),
+                }]} >SOL</Text>
+
+                <Text style={[styles.coinValue, {
+                  color: 'gray',
+                  fontSize: wp('3%'),
+                  marginLeft: wp('1%')
+                }]}>
+                  --
+                </Text>
               </View>
               <TouchableOpacity style={[styles.ButtonContainer, {
 
-                height: 50,
-
-                borderRadius: 20,
+                height: hp('6%'),
+                width: '100%',
+                borderRadius: wp('5%'),
                 alignItems: 'center',
                 justifyContent: 'center',
 
@@ -91,79 +128,63 @@ const ListItem = ({ item }) => {
                   end={{ x: 1, y: 0 }}
                   style={{
                     width: '50%',
-                    marginHorizontal: 5,
-                    borderRadius: 5, padding: 5,
+                    marginHorizontal: wp('1%'),
+                    borderRadius: wp('2%'), padding: wp('1%'),
                     alignItems: 'center',
                     justifyContent: 'center',
+                    height: hp('4%')
                   }}>
                   <Text style={{
                     color: colors.bluishCyan[100],
                     fontWeight: 'bold',
-                    fontSize: 12
+                    fontSize: wp('3%')
                   }}>ConnectWallet</Text>
                 </LinearGradient>
               </TouchableOpacity>
+
             </View>
-            <View style={[styles.pendingRewardsContainer, {
-              borderWidth: 1,
-              marginHorizontal: 10,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderRadius: 15,
-              height: 120,
-              marginTop: 10
+            <View style={[styles.DepositContainer, {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              borderWidth: wp('0.1%'),
+              borderColor: 'gray',
+              borderRadius: wp('5%'),
+
+
             }]}>
-              <View style={[styles.labelVlueContainer, {
-                marginTop: 5,
-                marginRight: 120
-              }]}>
-                <Text style={styles.label}>Pending Rewards</Text>
-                <Text style={styles.value}>$0.00</Text>
-              </View>
               <TouchableOpacity style={[styles.ButtonContainer, {
-                alignItems: 'flex-end',
 
-                height: 60,
+                height: hp('8%'),
+                width: '100%',
+                borderRadius: wp('5%'),
+                alignItems: 'center',
+                justifyContent: 'center',
 
-              }
-              ]}>
+              }]}>
                 <LinearGradient
                   colors={['#58f3cd', '#58f3cd']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
-                  style={styles.connectWalletButton}>
-                  <Text style={[styles.connectWalletButtonText, {
-                    fontSize: 14,
+                  style={{
+                    width: '90%',
+                    marginHorizontal: wp('1%'),
+                    borderRadius: wp('2%'), padding: wp('1%'),
+                    alignItems: 'center',
                     justifyContent: 'center',
-                    textAlign: 'center',
-                  }]}>ConnectWallet</Text>
+                    height: hp('5%')
+                  }}>
+                  <Text style={{
+                    color: colors.bluishCyan[100],
+                    fontWeight: 'bold',
+                    fontSize: wp('4%')
+                  }}>ConnectWallet</Text>
                 </LinearGradient>
               </TouchableOpacity>
+
             </View>
 
           </View>
-          <View style={[styles.ThreeIconButtonContainer, {
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 10,
-            marginVertical: 10,
-            gap: 10,
 
-
-          }]}>
-            <TouchableOpacity style={styles.swapButton}>
-              <AntDesign name="link" size={24} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.swapButton}>
-              <AntDesign name="plus" size={24} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.swapButton,]}>
-              <AntDesign style={{
-                transform: [{ rotate: '90deg' }]
-              }} name="swap" size={24} color="white" />
-            </TouchableOpacity>
-          </View>
 
         </View>
       )}
@@ -173,18 +194,20 @@ const ListItem = ({ item }) => {
 };
 
 export default function Staking() {
-  //get screen name
-  const ScreenName = ScreenNames.STAKING;
-  const [sorted, setSorted] = useState("");
-  const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"];
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleSortOptionSelect = (option) => {
-    setSorted(option);
-    setIsExpanded(false);
-  };
 
   const data = [{
+    id: 1, projectName1: "SOL", projectName2: "USDC", stared: false, rewards: [{
+      reward1: "SOL",
+    }, {
+      reward2: "USDC",
+    }],
+    apr: "--",
+    fee: "0.00%",
+    liquidity: "$0.00",
+    volume: "$0.00",
+    fees: "$0.00",
+  },
+  {
     id: 1, projectName1: "SOL", projectName2: "USDC", stared: false, rewards: [{
       reward1: "SOL",
     }, {
@@ -199,63 +222,36 @@ export default function Staking() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={ScreenName} />
+      <Header title={'STAKING'} />
       <View style={[styles.labelLoadingContainer, {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin:10
+        margin: hp('1%')
       }]}>
         <Text style={[styles.stackLable, {
           color: 'white',
-          fontSize: 18,
+          fontSize: wp('5%'),
           fontWeight: 'bold',
-        }]} >Stacking</Text>
-        <ActivityIndicator  size="small" color="gray" />
+        }]} >Staking</Text>
+        <ActivityIndicator size="small" color="gray" />
       </View>
+
       <View style={styles.boxCont}>
 
-      </View>
-      {/* <View style={styles.boxCont}>
-        <View style={styles.searchSortBox}>
-          <View style={styles.searchBox}>
-            <TextInput
-              placeholder="Search"
-              placeholderTextColor="gray"
-              style={styles.searchInput}
-            />
-          </View>
-          <View style={styles.expandableContainer}>
-            <TouchableOpacity style={styles.sortDropDown} onPress={() => setIsExpanded(true)}>
-              <Text style={styles.sortText}>Sort by: {sorted}</Text>
-            </TouchableOpacity>
-            {
-              isExpanded ?
-                sortOptions.map((option, index) => (
-                  <TouchableOpacity style={styles.sortDropDown} key={index} onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.sortText}>{option}</Text>
-                  </TouchableOpacity>
-                )) : null
-            }
-          </View>
-          <View style={styles.threeDotIcon}>
-            <AntDesign name="ellipsis1" size={24} color="white" />
-          </View>
-        </View>
         {data ? (
           <FlatList
             data={data}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => <ListItem item={item} />} // Using ListItem component here
+            renderItem={({ item }) => <ListItem item={item} />}
           />
         ) : (
           <ActivityIndicator style={{ flex: 1 }} size="large" color="white" />
         )}
 
-      </View> */}
+      </View>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -265,74 +261,19 @@ const styles = StyleSheet.create({
   boxCont: {
     flex: 1,
     backgroundColor: color.primaryColor,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  searchSortBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  searchBox: {
-    backgroundColor: colors.blueViolet[1600],
-    borderRadius: 10,
-    width: '30%',
-    height: 40,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  searchInput: {
-    color: 'white',
-  },
-  expandableContainer: {
-    backgroundColor: colors.blueViolet[1600],
-    borderRadius: 10,
-    width: '40%',
-    height: 40,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  sortDropDown: {
-    backgroundColor: colors.blueViolet[1600],
-    borderRadius: 10,
-    width: '100%',
-    height: 40,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  sortText: {
-    color: 'white',
-  },
-  threeDotIcon: {
-    backgroundColor: colors.blueViolet[1600],
-    borderRadius: 10,
-    width: '10%',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('2%'),
+    borderRadius: wp('5%'),
   },
   containerExpand: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
-  },
-  imageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  projectName: {
-    color: 'white',
-    fontSize: 16,
-  },
-  fee: {
-    color: 'gray',
-    fontSize: 12,
+    padding: wp('4%'),
   },
   label: {
     color: 'gray',
-    fontSize: 12,
+    fontSize: wp('3%'),
   },
   rewardContainer: {
     flexDirection: 'row',
@@ -341,14 +282,36 @@ const styles = StyleSheet.create({
   },
   expandedContainer: {
     backgroundColor: colors.blueViolet[1600],
-    padding: 10,
+    padding: wp('2%'),
+    borderRadius: wp('6%')
   },
-  twoBoxContainer: {
+  separator: {
+    height: 0.5,
+    backgroundColor: 'gray',
+    marginVertical: hp('1%'),
+  },
+  ButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: hp('1%'),
+    padding: wp('1%'),
   },
-  depositContainer: {
-    flex: 1,
-  } 
+  buttonsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.blueViolet[1600],
+  },
+  DepositContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: hp('1%'),
+    padding: wp('1%'),
+  },
+  coinInfoContainer: {
+    marginVertical: hp('1%'),
+  },
 });

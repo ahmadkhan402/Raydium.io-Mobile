@@ -3,6 +3,7 @@ import { StyleSheet, View, SafeAreaView, ScrollView, Text, TextInput, TouchableO
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import Header from '../../../components/header';
 import { FlatList } from 'react-native-gesture-handler';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Pool() {
   const [sorted, setSorted] = useState("");
@@ -12,7 +13,7 @@ export default function Pool() {
     setSorted(option);
     setIsExpanded(false);
   };
-  const data  = null;// Add your data here
+  const data = null;// Add your data here
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Pool" />
@@ -43,7 +44,7 @@ export default function Pool() {
             }
           </View>
           <TouchableOpacity style={styles.threeDotIcon}>
-            <AntDesign name="ellipsis1" size={24} color="white" />
+            <AntDesign name="ellipsis1" size={wp('6%')} color="white" />
           </TouchableOpacity>
         </View>
         {
@@ -58,12 +59,12 @@ export default function Pool() {
               )}
             />
           ) : (
-              <ActivityIndicator style={{
-                flex: 1,
+            <ActivityIndicator style={{
+              flex: 1,
             }} size="large" color="white" />
           )
         }
-   
+
       </View>
     </SafeAreaView>
   );
@@ -78,24 +79,23 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   expandableContainer: {
-    width: '100%',
-    marginHorizontal: 20,
+    width: wp('100%'),
+    marginHorizontal: wp('4%'),
   },
   boxCont: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: wp('4%'),
+    paddingVertical: hp('4%'),
     borderColor: 'gray',
     borderWidth: 1,
     flex: 1,
-    marginHorizontal: 20,
-    borderRadius: 25,
-    marginTop: 0,
-    marginBottom: 15,
+    marginHorizontal: wp('4%'),
+    borderRadius: wp('6%'),
+    marginBottom: hp('1%'),
   },
   TVL_VolumeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: wp('5%'),
   },
   TVL_VolumeContainerText: {
     color: 'white',
@@ -106,37 +106,38 @@ const styles = StyleSheet.create({
   searchSortBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    top:hp('-2%'),
   },
   searchBox: {
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 10,
-    height: 30,
-    width: '40%',
+    borderRadius: wp('5%'),
+    height: hp('5%'),
+    width: wp('35%'),
   },
   searchInput: {
     color: 'gray',
-    padding: 5,
+    padding: wp('2%'),
   },
   sortDropDown: {
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 10,
-    height: 30,
-    width: '40%',
+    borderRadius: wp('5%'),
+    height: hp('5%'),
+    width: wp('35%'),
     justifyContent: 'center',
     alignItems: 'center',
-    right: 5,
+    right: wp('1%'),
   },
   sortText: {
     color: 'gray',
   },
   threeDotIcon: {
-    top:5,
-    right:0,
-    width: '10%',
+    marginTop: hp('2%'),
+    right: 0,
+    width: wp('10%'),
     position: 'absolute',
-    transform: [{rotate:'90deg'}]
+    transform: [{ rotate: '90deg' }]
   },
   modalBackdrop: {
     flex: 1,
@@ -145,15 +146,15 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    width: '100%',
+    borderTopLeftRadius: wp('1%'),
+    borderTopRightRadius: wp('1%'),
+    width: wp('100%'),
   },
   modalContent: {
-    padding: 20,
+    padding: wp('5%'),
   },
   modalOption: {
-    paddingVertical: 10,
-    fontSize: 16,
+    paddingVertical: wp('2%'),
+    fontSize: wp('4%'),
   },
 });
