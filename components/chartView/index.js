@@ -54,7 +54,7 @@ export default function ChartView() {
                             datasets: [
                                 {
                                     data: coin.chartData,
-                                    color: (opacity = 1) => coin.colors // Accessing color from coinData
+                                    color: (opacity = 1) => coin.colors 
                                 },
                             ]
                         }}
@@ -67,11 +67,11 @@ export default function ChartView() {
                             decimalPlaces: 2,
                             color: (opacity = 1) => coin.colors,
                             style: {
-                                borderRadius: wp('5%') // Use responsive border radius
+                                borderRadius: wp('5%') 
                             },
                             propsForDots: {
-                                r: wp('3%'), // Use responsive dot size
-                                strokeWidth: wp('1%'), // Use responsive stroke width
+                                r: wp('3%'), 
+                                strokeWidth: wp('1%'), 
                                 stroke: '#192f6a',
                             }
                         }}
@@ -91,46 +91,46 @@ export default function ChartView() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: hp('2%'), // Use responsive margin
+        marginTop: hp('2%'),
         justifyContent: 'center',
         alignSelf: "center",
         backgroundColor: '#192f6a',
-        borderRadius: wp('5%'), // Use responsive border radius
-        height: hp('58%'), // Use responsive height
-        width: wp('92%'), // Use responsive width
+        borderRadius: wp('5%'), 
+        height: hp('58%'), 
+        width: wp('92%'), 
     },
     chartContainer: {
         backgroundColor: '#192f6a',
-        borderRadius: wp('5%'), // Use responsive border radius
-        marginBottom: hp('2%'), // Use responsive margin
+        borderRadius: wp('5%'), 
+        marginBottom: hp('2%'),
     },
     infoContainer: {
         flexDirection: "row",
-        paddingHorizontal: wp('6%'), // Use responsive padding
-        paddingVertical: hp('2%'), // Use responsive padding
+        paddingHorizontal: wp('6%'), 
+        paddingVertical: hp('2%'), 
         justifyContent: "space-between",
         alignItems: "center",
     },
     label: {
-        paddingTop: hp('1%'), // Use responsive padding
+        paddingTop: hp('1%'), 
         color: '#FFFFFF',
-        fontSize: wp('3%'), // Use responsive font size
+        fontSize: wp('3%'),
     },
     coinAvatar: {
-        width: wp('15%'), // Use responsive width
-        height: wp('15%'), // Use responsive height
-        borderRadius: wp('7.5%'), // Use responsive border radius
+        width: wp('15%'), 
+        height: wp('15%'), 
+        borderRadius: wp('7.5%'), 
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: wp('5%'), // Use responsive margin
+        marginRight: wp('5%'), 
     },
     avatarImage: {
-        width: wp('10%'), // Use responsive width
-        height: wp('10%'), // Use responsive height
-        borderRadius: wp('5%'), // Use responsive border radius
+        width: wp('10%'), 
+        height: wp('10%'), 
+        borderRadius: wp('5%'), 
     },
     priceContainer: {
-        marginRight: wp('5%'), // Use responsive margin
+        marginRight: wp('5%'), 
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import colors from '../../utills/RecommendedColors';
+import ScreenNames from '../../../routes/route';
 
 export const ListItem = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
@@ -60,7 +61,7 @@ export const ListItem = ({ item }) => {
                 <Text style={styles.label}>Deposit</Text>
                 <Text style={styles.value}>$0.00</Text>
               </View>
-              <TouchableOpacity style={[styles.ButtonContainer, {
+              <TouchableOpacity onPress={() => nav.navigate(ScreenNames.WALLET_CONNECT)} style={[styles.ButtonContainer, {
 
                 height: hp('7%'),
 
@@ -70,9 +71,9 @@ export const ListItem = ({ item }) => {
 
               }]}>
                 <LinearGradient
-                  colors={['#58f3cd', '#58f3cd']}
+                  colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                   start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
+                  end={{ x: 1, y: 2 }}
                   style={{
                     width: '50%',
                     marginHorizontal: wp('1%'),
@@ -104,7 +105,8 @@ export const ListItem = ({ item }) => {
                 <Text style={styles.label}>Pending Rewards</Text>
                 <Text style={styles.value}>$0.00</Text>
               </View>
-              <TouchableOpacity style={[styles.ButtonContainer, {
+              <TouchableOpacity
+                onPress={() => nav.navigate(ScreenNames.WALLET_CONNECT)} style={[styles.ButtonContainer, {
                 alignItems: 'flex-end',
 
                 height: hp('8%'),
@@ -112,7 +114,7 @@ export const ListItem = ({ item }) => {
               }
               ]}>
                 <LinearGradient
-                  colors={['#58f3cd', '#58f3cd']}
+                  colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={styles.connectWalletButton}>
@@ -120,6 +122,7 @@ export const ListItem = ({ item }) => {
                     fontSize: wp('3.5%'),
                     justifyContent: 'center',
                     textAlign: 'center',
+                    color: colors.bluishCyan[100],
                   }]}>Connect Wallet</Text>
                 </LinearGradient>
               </TouchableOpacity>
@@ -135,15 +138,15 @@ export const ListItem = ({ item }) => {
             gap: wp('1%'),
           }]}>
             <TouchableOpacity style={styles.swapButton}>
-              <AntDesign name="link" size={wp('4%')} color="white" />
+              <AntDesign name="link" size={wp('4%')} color={colors.bluishCyan[100]} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.swapButton}>
-              <AntDesign name="plus" size={wp('4%')} color="white" />
+              <AntDesign name="plus" size={wp('4%')} color={colors.bluishCyan[100]} />
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.swapButton,]}>
+            <TouchableOpacity onPress={() => nav.navigate(ScreenNames.SWAP)} style={[styles.swapButton,]}>
               <AntDesign style={{
                 transform: [{ rotate: '90deg' }]
-              }} name="swap" size={wp('4%')} color="white" />
+              }} name="swap" size={wp('4%')} color={colors.bluishCyan[100]} />
             </TouchableOpacity>
           </View>
         </View>
@@ -204,11 +207,9 @@ const styles = StyleSheet.create({
     paddingVertical: hp('2%'),
     borderRadius: wp('3%'),
     elevation: 40,
-    borderRightWidth: wp('0.1%'),
-    borderLeftWidth: wp('0.1%'),
-    borderBottomWidth: wp('0.1%'),
-    borderTopWidth: wp('0.1%'),
-    borderColor: "#58f3cd",
+    borderWidth: wp('0.1%'),
+
+    borderColor: colors.bluishCyan[100],
     alignItems: 'center',
     paddingHorizontal: wp('5%'),
   },
@@ -217,11 +218,9 @@ const styles = StyleSheet.create({
     paddingVertical: hp('2%'),
     borderRadius: wp('3%'),
     elevation: 40,
-    borderRightWidth: wp('0.1%'),
-    borderLeftWidth: wp('0.1%'),
-    borderBottomWidth: wp('0.1%'),
-    borderTopWidth: wp('0.1%'),
-    borderColor: "#58f3cd",
+    borderWidth: wp('0.1%'),
+  
+    borderColor: colors.bluishCyan[100],
     alignItems: 'center',
     paddingHorizontal: wp('5%'),
   },

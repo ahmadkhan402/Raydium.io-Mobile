@@ -55,7 +55,7 @@ const CoinInput = ({ coinInfo }) => {
 
 export default function SwapBoxContainer() {
     const [isSwapped, setIsSwapped] = useState(false);
-
+const navigation = useNavigation();
     const toggleSwap = () => {
         setIsSwapped((prev) => !prev);
     };
@@ -95,7 +95,7 @@ export default function SwapBoxContainer() {
                 <View>
                     <CoinInput coinInfo={coinTo} />
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate(ScreenNames.WALLET_CONNECT)}>
                 <LinearGradient
                     style={styles.connectWalletButton}
                     colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
