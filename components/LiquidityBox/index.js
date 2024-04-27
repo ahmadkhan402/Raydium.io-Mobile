@@ -10,12 +10,19 @@ const navigation = useNavigation()
 
     };
     const inputRef = useRef(null);
+    const inputRef2 = useRef(null);
 
     const handleMaxPress = () => {
         inputRef.current.focus();
     };
     const handleHalfPress = () => {
         inputRef.current.focus();
+    }
+    const handleMaxPress1 = () => {
+        inputRef2.current.focus();
+    };
+    const handleHalfPress2 = () => {
+        inputRef2.current.focus();
     }
 
     return (
@@ -37,7 +44,7 @@ const navigation = useNavigation()
                         </View>
                         <View style={styles.coinInfo}>
                             <Text style={styles.coinText}>SOL</Text>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.SELECT_TOKEN)} >
                                 <AntDesign name="down" size={20} color="#FFFFFF" />
                             </TouchableOpacity>
                         </View>
@@ -52,7 +59,7 @@ const navigation = useNavigation()
                             <TextInput
                                 ref={inputRef}
                                 style={styles.input}
-                                placeholder="0.0"
+                                placeholder=""
                                 placeholderTextColor="#FFFFFF"
                                 keyboardType="numeric"
                             />
@@ -66,7 +73,9 @@ const navigation = useNavigation()
                     </TouchableOpacity>
                     <View style={styles.addContainer}>
                         <View style={styles.row}>
-                            <TouchableOpacity style={styles.iconContainer}>
+                            <TouchableOpacity style={[styles.iconContainer, {
+                                marginLeft: wp('25%'),
+                            }]}>
                                 <EvilIcons name="search" size={25} color="#FFFFFF" style={styles.swapIcon} />
                             </TouchableOpacity>
                         </View>
@@ -84,24 +93,25 @@ const navigation = useNavigation()
                         </View>
                         <View style={styles.coinInfo}>
                             <Text style={styles.coinText}>RAY</Text>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.SELECT_TOKEN)} >
                                 <AntDesign name="down" size={20} color="#FFFFFF" />
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={styles.maxButton}>
+                        <TouchableOpacity onPress={handleMaxPress1} style={styles.maxButton}>
                             <Text style={styles.maxButtonText}>Max</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.maxButton}>
+                        <TouchableOpacity onPress={handleHalfPress2} style={styles.maxButton}>
                             <Text style={styles.maxButtonText}>Half</Text>
                         </TouchableOpacity>
                         <View style={styles.inputSection}>
                             <TextInput
                                 
                                 style={styles.input}
-                                placeholder="0.0"
+                                placeholder=""
                                 placeholderTextColor="#FFFFFF"
                                 keyboardType="numeric"
+                                ref={inputRef2}
                             />
                         </View>
                     </View>
@@ -124,6 +134,7 @@ const navigation = useNavigation()
 
 import { StyleSheet } from "react-native";
 import color from "../../src/utills/Database";
+import ScreenNames from '../../routes/route';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -216,8 +227,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: hp('2%'),
         paddingHorizontal: wp('4%'),
-        justifyContent: "center",
-        alignItems: "center",
+        alignItems: "space-between",
+        marginLeft: wp('30%'),
        
     },
     swapIcon: {

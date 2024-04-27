@@ -7,12 +7,15 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import color from '../../utills/Database';
 import colors from '../../utills/RecommendedColors';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import ScreenNames from '../../../routes/route';
 const ListItem = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
+  const nav = useNavigation()
 
   return (
     <TouchableOpacity style={{
@@ -113,7 +116,7 @@ const ListItem = ({ item }) => {
                   --
                 </Text>
               </View>
-              <TouchableOpacity style={[styles.ButtonContainer, {
+              <TouchableOpacity onPress={()=>nav.navigate(ScreenNames.WALLET_CONNECT)} style={[styles.ButtonContainer, {
 
                 height: hp('6%'),
                 width: '100%',
@@ -123,9 +126,9 @@ const ListItem = ({ item }) => {
 
               }]}>
                 <LinearGradient
-                  colors={['#58f3cd', '#58f3cd']}
+                  colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                   start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
+                  end={{ x: 0, y: 1 }}
                   style={{
                     width: '50%',
                     marginHorizontal: wp('1%'),
@@ -152,7 +155,7 @@ const ListItem = ({ item }) => {
 
 
             }]}>
-              <TouchableOpacity style={[styles.ButtonContainer, {
+              <TouchableOpacity onPress={() => nav.navigate(ScreenNames.WALLET_CONNECT)} style={[styles.ButtonContainer, {
 
                 height: hp('8%'),
                 width: '100%',
@@ -162,7 +165,7 @@ const ListItem = ({ item }) => {
 
               }]}>
                 <LinearGradient
-                  colors={['#58f3cd', '#58f3cd']}
+                  colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={{
