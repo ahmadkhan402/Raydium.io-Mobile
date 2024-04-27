@@ -42,7 +42,7 @@ const CoinInput = ({ coinInfo }) => {
                     <TextInput
                         ref={inputRef}
                         style={styles.input}
-                        placeholder="0.0"
+                        placeholder=""
                         placeholderTextColor="#FFFFFF"
                         keyboardType="numeric"
                     />

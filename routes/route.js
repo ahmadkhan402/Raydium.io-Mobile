@@ -8,6 +8,7 @@ const ScreenNames = {
   STAKING: "Staking",
   ACCELERAYTOR: "AcceleRaytor",
   WALLET_CONNECT: "WalletConnect",
+  SELECT_TOKEN: "SelectToken",
 
 
   };
