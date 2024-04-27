@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import { useNavigation } from '@react-navigation/native';
 export default function LiquidityBoxContainer() {
-
+const navigation = useNavigation()
     const toggleAdd = () => {
 
     };
+    const inputRef = useRef(null);
+
+    const handleMaxPress = () => {
+        inputRef.current.focus();
+    };
+    const handleHalfPress = () => {
+        inputRef.current.focus();
+    }
 
     return (
         <LinearGradient
@@ -34,14 +42,15 @@ export default function LiquidityBoxContainer() {
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={styles.maxButton}>
+                        <TouchableOpacity onPress={handleMaxPress} style={styles.maxButton}>
                             <Text style={styles.maxButtonText}>Max</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.maxButton}>
+                        <TouchableOpacity onPress={handleHalfPress} style={styles.maxButton}>
                             <Text style={styles.maxButtonText}>Half</Text>
                         </TouchableOpacity>
                         <View style={styles.inputSection}>
                             <TextInput
+                                ref={inputRef}
                                 style={styles.input}
                                 placeholder="0.0"
                                 placeholderTextColor="#FFFFFF"
@@ -88,6 +97,7 @@ export default function LiquidityBoxContainer() {
                         </TouchableOpacity>
                         <View style={styles.inputSection}>
                             <TextInput
+                                
                                 style={styles.input}
                                 placeholder="0.0"
                                 placeholderTextColor="#FFFFFF"
@@ -207,7 +217,8 @@ const styles = StyleSheet.create({
         marginBottom: hp('2%'),
         paddingHorizontal: wp('4%'),
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+       
     },
     swapIcon: {
         width: wp('6%'),

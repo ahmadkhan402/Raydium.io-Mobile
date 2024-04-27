@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Keyboard } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
 const CoinInput = ({ coinInfo }) => {
+    const navigation = useNavigation()
     const inputRef = useRef(null);
 
     const handleMaxPress = () => {
@@ -27,7 +28,7 @@ const CoinInput = ({ coinInfo }) => {
                 </View>
                 <View style={styles.coinInfo}>
                     <Text style={styles.coinText}>{coinInfo.symbol}</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate(ScreenNames.SELECT_TOKEN)}>
                         <AntDesign name="down" size={20} color="#FFFFFF" />
                     </TouchableOpacity>
                 </View>
@@ -111,6 +112,7 @@ export default function SwapBoxContainer() {
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import color from "../../src/utills/Database";
+import ScreenNames from '../../routes/route';
 
 const styles = StyleSheet.create({
     cardContainer: {
