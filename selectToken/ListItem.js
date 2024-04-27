@@ -4,9 +4,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import ScreenNames from '../../../routes/route';
-import colors from '../../utills/RecommendedColors';
-import color from '../../utills/Database';
+import ScreenNames from '../routes/route';
+import colors from '../src/utills/RecommendedColors';
+import color from '../src/utills/Database';
 
 export const ListItem = ({ item }) => {
   const nav = useNavigation();

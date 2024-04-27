@@ -63,6 +63,8 @@ const colors = {
     100: '#e54bf9',
     200: '#da2eef',
     300: '#e300ff',
+    400: '#c200fb',
+    500: '#ff5bff',
   },
   blue: {
     100: '#aadefe',

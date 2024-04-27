@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -20,174 +20,234 @@ export const ListItem = ({ item }) => {
   return (
     <TouchableOpacity
       style={{
-        marginTop: hp('1%'),
-        borderRadius: wp('3%'), 
-        width: '100%',
-        backgroundColor: colors.blueViolet[1600],
+        marginTop: hp('0.4%'),
+        borderRadius: wp('3%'),
+        width: wp('90%'),
+        backgroundColor:  colors.purpleViolet[800] ,
+        height: expanded ? hp('88%') : hp('22%'),
+        marginLeft: wp('5%'),
+        marginBottom: hp('2%'),
+        borderWidth: 1,
+        borderTopColor: colors.purpleMagenta[100],
+        borderBlockEndColor: colors.cyan[800],
+        borderLeftColor: colors.cyan[800],
+        borderRightColor: colors.purpleMagenta[100]
       }}
       onPress={toggleExpand}
     >
       <View style={styles.containerExpand}>
-        <View>
-          <AntDesign name={'star'} size={wp('4%')} color="yellow" />
-        </View>
-        <View>
-          {/* Images */}
+        <View style={styles.filledContainer}>
           <View style={styles.imageContainer}>
-            {/* Placeholder icon if image is not present */}
-            <AntDesign name={'questioncircleo'} size={wp('4%')} color="gray" />
-            <AntDesign name={'questioncircleo'} size={wp('4%')} color="gray" />
+            <Image
+              source={{ uri: item.iconImage }}
+              style={{ width: wp('10%'), height: hp('5%') }}
+            />
+            <View style={styles.namesContainer}>
+              <Text style={styles.projectName}>{item.name}</Text>
+              <Text style={styles.fullName}>{item.fullName}</Text>
+            </View>
           </View>
-          {/* projectsName */}
-          <View>
-            <Text style={styles.projectName}>{item.projectName1}-{item.projectName2}</Text>
-            <Text style={styles.fee}>{item.fee}</Text>
-          </View>
-        </View>
-        {/* reward */}
-        <View style={{ top: hp('1%') }}>
-          <Text style={styles.label}>Rewards</Text>
-          <View style={styles.rewardContainer}>
-            {/* Reward image */}
-            <AntDesign name={'questioncircleo'} size={wp('4%')} color="gray" />
+          <View style={styles.separator} />
+          <View style={styles.fillContainer} >
+            <Text style={styles.fillText}>{item.fill_percentage}</Text>
           </View>
         </View>
-        {/* apr */}
-        <View style={{ top: hp('0.1%') }}>
-          <Text style={styles.label}>APR(7D)</Text>
-          <Text style={styles.label}>{item.apr}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity>
+            <LinearGradient
+              style={styles.Button}
+              colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              <Text style={styles.ButtonText}>Claim {item.name}</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <LinearGradient
+              style={styles.Button}
+              colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              <Text style={styles.ButtonText}>Claim UDSC</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
         </View>
         <View>
           <AntDesign name={expanded ? 'caretup' : 'caretdown'} size={wp('4%')} color="gray" />
         </View>
       </View>
-      {expanded && (
-        <View style={styles.expandedContainer}>
-          <View style={styles.separator} />
-          <View style={styles.rowContainer}>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Liquidity</Text>
-              <Text style={styles.label}>{item.liquidity}</Text>
+      {
+        expanded && (
+          <View style={styles.expandedMain}>
+            <View style={styles.fullImageContainer}>
+              <Image
+                source={{ uri: item.coinImage }}
+                style={styles.fullImage}
+                crossOrigin='anonymous'
+                
+              />
             </View>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Volume</Text>
-              <Text style={styles.label}>{item.volume}</Text>
-            </View>
-            <View style={styles.columnContainer}>
-              <Text style={styles.label}>Fees</Text>
-              <Text style={styles.label}>{item.fees}</Text>
+            <View style={styles.InfoContainer}>
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Total Raised</Text>
+                <Text style={styles.InfoText}><Text style={styles.InfoValueText}>{item.raise}</Text> {item.name}</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Per {item.name}</Text>
+                <Text style={styles.InfoText}><Text style={styles.InfoValueText}>{item.price}</Text> UDSC</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Total tickets deposited</Text>
+                <Text style={styles.InfoText}>
+                  <Text style={styles.InfoValueText}>{item.total_deposited_Tickets}</Text> UDSC</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Allocation / Winning Ticket</Text>
+                <Text style={styles.InfoText}>
+                  <Text style={styles.InfoValueText}>{item.allocation}</Text> UDSC</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Pool Open</Text>
+                <Text style={styles.InfoText}>
+                  <Text style={styles.InfoValueText}>{item.pool_open}</Text> UTC</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              <View style={styles.Info}>
+                <Text style={styles.InfoText}>Pool Close</Text>
+                <Text style={styles.InfoText}>
+                  <Text style={styles.InfoValueText}>{item.pool_close}</Text> UTC</Text>
+              </View>
+              <View style={styles.InfoSeprator} />
+              
             </View>
           </View>
-          <View style={{ marginVertical: hp('1.5%'), alignItems: 'center', width: '100%' }}>
-        
-            <Text style={{ color: 'gray', fontSize: wp('4%'), marginBottom: hp('1%'), fontWeight: 'bold' }}>
-              Want to open new position?
-            </Text>
-            <View style={styles.ButtonContainer}>
-              <LinearGradient
-                colors={['rgba(59, 208, 216, .2)', 'rgba(59, 208, 216, 0)']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.connectWalletButton}
-              >
-                <TouchableOpacity>
-                  <Text style={styles.connectWalletButtonText}>Create position</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-              <TouchableOpacity onPress={() => nav.navigate(ScreenNames.SWAP)} style={styles.swapButton}>
-                <AntDesign name="swap" size={wp('4%')} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      )}
+        )}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   containerExpand: {
-    flexDirection: 'row',
     alignItems: 'center',
     padding: wp('2%'),
-    gap: wp('1%'),
-    justifyContent: 'space-around'
   },
   imageContainer: {
-    marginRight: wp('2%'), 
     flexDirection: 'row',
-    gap: wp('-1.5%')
+    alignItems: 'center',
+    flex: 1,
   },
   projectName: {
     fontWeight: 'bold',
-    color: 'gray',
+    color: 'white',
   },
-  fee: {
+  fullName: {
     color: 'gray',
+    fontSize: wp('3%'),
   },
-  rewardContainer: {
+  filledContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    width: wp('80%'),
+    marginHorizontal: wp('5%'),
+   
   },
-  label: {
-    fontWeight: 'bold',
-    marginBottom: hp('0.5%'), 
-    color: 'gray',
-  },
-  expandedContainer: {
-    padding: wp('2%'),
+  namesContainer: {
+    marginLeft: wp('2%'),
+    flex: 1,
   },
   separator: {
-    height: hp('0.2%'), 
+    height: '100%',
     backgroundColor: 'gray',
-    marginVertical: hp('1%'), 
+    width: 1,
+    marginHorizontal: wp('8%'),
   },
-  rowContainer: {
+  fillContainer: {
+    backgroundColor: 'rgba(194, 0, 251, 0.8)',
+    borderWidth: 1,
+    borderColor: colors.magenta[100],
+    borderRadius: wp('6%'),
+    width: wp('30%'),
+    height: hp('3.5%'),
+    marginRight: wp('2%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fillText: {
+    color: colors.magenta[500],
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: wp('1%'),
+    width: wp('80%'),
+    marginHorizontal: wp('10%'),
+    marginVertical: hp('4%'),
   },
-  columnContainer: {
-    flexDirection: 'column',
+  Button: {
+    width: wp('35%'),
+    height: hp('5%'),
+    borderRadius: wp('3.5%'),
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: hp('0.5%'),
   },
-  ButtonContainer: {
-    flexDirection: 'row',
-    width: '100%',
+  ButtonText: {
+    color: colors.cyan[700],
+    fontWeight: 'bold',
+  },
+  expandedMain: {
+    flex:1,
+    backgroundColor: '#192f6a',
+    borderRadius: wp('3%'),
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: hp('1.5%'), 
-    padding: wp('2%'),
+ 
   },
-  connectWalletButton: {
-    paddingVertical: hp('2%'),
+  fullImageContainer: {
     borderRadius: wp('3%'),
-    elevation: 40,
-    borderRightWidth: wp('0.1%'), 
-    borderLeftWidth: wp('0.1%'), 
-    borderBottomWidth: wp('0.1%'), 
-    borderTopWidth: wp('0.1%'), 
-    borderColor: "#58f3cd",
     alignItems: 'center',
-    paddingHorizontal: wp('4%'),
+    width: wp('90%'),
+    top: hp('-10%'),
   },
-  swapButton: {
-    marginHorizontal: wp('1%'), 
-    paddingVertical: hp('2%'),
+
+  fullImage: {
+  
+    width: wp('88%'),
+    height: hp('15%'),
     borderRadius: wp('3%'),
-    elevation: 40,
-    borderRightWidth: wp('0.1%'), 
-    borderLeftWidth: wp('0.1%'), 
-    borderBottomWidth: wp('0.1%'), 
-    borderTopWidth: wp('0.1%'), 
-    borderColor: "#58f3cd",
-    alignItems: 'center',
-    paddingHorizontal: wp('4%'),
-    transform: [{ rotate: '90deg' }],
   },
-  connectWalletButtonText: {
-    color: color.menuColor,
-    fontWeight: 'bold',
+  InfoContainer: {
+    marginTop:hp("1%"),
+    justifyContent: 'space-between',
+    width: wp('80%'),
+    marginHorizontal: wp('5%'),
+    bottom: hp('10%'),
+  },
+  Info: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: hp('1%'),
+  },
+  InfoText: {
+    color: 'gray',
     fontSize: wp('4%'),
+    fontWeight:'700'
   },
+  InfoSeprator: {
+    height: 1,
+    backgroundColor: 'gray',
+    width: wp('80%'),
+  },
+  InfoValueText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: wp('4%'),
+  }
 });
