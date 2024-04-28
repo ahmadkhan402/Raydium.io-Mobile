@@ -4,14 +4,17 @@ import ReydiamIndex from './src/screens/home';
 import DrawerNavigator from './routes/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Routes from './routes/stack';
+import { StatusBar } from 'expo-status-bar';
 
 const App = () => {
   return (
-  //   <NavigationContainer>
-   <DrawerNavigator/>
-  //  </NavigationContainer>
+    <>
+      <StatusBar hidden style="light" />
+      <DrawerNavigator />
+    </>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

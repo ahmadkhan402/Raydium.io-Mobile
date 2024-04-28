@@ -3,17 +3,17 @@ import { StyleSheet, View, SafeAreaView, ScrollView, Text, TextInput, TouchableO
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import Header from '../../../components/header';
 import { FlatList } from 'react-native-gesture-handler';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Pool() {
   const [sorted, setSorted] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
   const sortOptions = ["POOL", "Option 1", "Option 2", "Option 3"]; // Add your sort options here
-
+  const [isExpanded, setIsExpanded] = useState(false);
   const handleSortOptionSelect = (option) => {
     setSorted(option);
-    setModalVisible(false);
+    setIsExpanded(false);
   };
-  const data  = null; // Add your data here
+  const data = null;// Add your data here
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Pool" />
@@ -30,12 +30,22 @@ export default function Pool() {
               style={styles.searchInput}
             />
           </View>
-          <TouchableOpacity style={styles.sortDropDown} onPress={() => setModalVisible(true)}>
-            <Text style={styles.sortText}>Sort by: {sorted}</Text>
-          </TouchableOpacity>
-          <View style={styles.threeDotIcon}>
-            <EvilIcons name="navicon" size={24} color="white" />
+          <View style={styles.expandableContainer}>
+            <TouchableOpacity style={styles.sortDropDown} onPress={() => setIsExpanded(true)}>
+              <Text style={styles.sortText}>Sort by: {sorted}</Text>
+            </TouchableOpacity>
+            {
+              isExpanded ?
+                sortOptions.map((option, index) => (
+                  <TouchableOpacity style={styles.sortDropDown} key={index} onPress={() => handleSortOptionSelect(option)}>
+                    <Text style={styles.sortText}>{option}</Text>
+                  </TouchableOpacity>
+                )) : null
+            }
           </View>
+          <TouchableOpacity style={styles.threeDotIcon}>
+            <AntDesign name="ellipsis1" size={wp('6%')} color="white" />
+          </TouchableOpacity>
         </View>
         {
           data ? (
@@ -49,31 +59,12 @@ export default function Pool() {
               )}
             />
           ) : (
-              <ActivityIndicator style={{
-                flex: 1,
+            <ActivityIndicator style={{
+              flex: 1,
             }} size="large" color="white" />
           )
         }
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <Pressable style={styles.modalBackdrop} onPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                {sortOptions.map((option, index) => (
-                  <Pressable key={index} onPress={() => handleSortOptionSelect(option)}>
-                    <Text style={styles.modalOption}>{option}</Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-          </Pressable>
-        </Modal>
+
       </View>
     </SafeAreaView>
   );
@@ -87,21 +78,24 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
   },
+  expandableContainer: {
+    width: wp('100%'),
+    marginHorizontal: wp('4%'),
+  },
   boxCont: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: wp('4%'),
+    paddingVertical: hp('4%'),
     borderColor: 'gray',
     borderWidth: 1,
     flex: 1,
-    marginHorizontal: 20,
-    borderRadius: 25,
-    marginTop: 0,
-    marginBottom: 15,
+    marginHorizontal: wp('4%'),
+    borderRadius: wp('6%'),
+    marginBottom: hp('1%'),
   },
   TVL_VolumeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: wp('5%'),
   },
   TVL_VolumeContainerText: {
     color: 'white',
@@ -112,35 +106,38 @@ const styles = StyleSheet.create({
   searchSortBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    top:hp('-2%'),
   },
   searchBox: {
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 10,
-    height: 30,
-    width: '40%',
+    borderRadius: wp('5%'),
+    height: hp('5%'),
+    width: wp('35%'),
   },
   searchInput: {
     color: 'gray',
-    padding: 5,
+    padding: wp('2%'),
   },
   sortDropDown: {
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 10,
-    height: 30,
-    width: '40%',
+    borderRadius: wp('5%'),
+    height: hp('5%'),
+    width: wp('35%'),
     justifyContent: 'center',
     alignItems: 'center',
-    right: 5,
+    right: wp('1%'),
   },
   sortText: {
     color: 'gray',
   },
   threeDotIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '10%',
+    marginTop: hp('2%'),
+    right: 0,
+    width: wp('10%'),
+    position: 'absolute',
+    transform: [{ rotate: '90deg' }]
   },
   modalBackdrop: {
     flex: 1,
@@ -149,15 +146,15 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    width: '100%',
+    borderTopLeftRadius: wp('1%'),
+    borderTopRightRadius: wp('1%'),
+    width: wp('100%'),
   },
   modalContent: {
-    padding: 20,
+    padding: wp('5%'),
   },
   modalOption: {
-    paddingVertical: 10,
-    fontSize: 16,
+    paddingVertical: wp('2%'),
+    fontSize: wp('4%'),
   },
 });
