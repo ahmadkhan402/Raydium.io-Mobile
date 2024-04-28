@@ -1,4 +1,4 @@
-rootProject.name = 'RaydiumApp'
+rootProject.name = 'Raydium.IO'
 
 dependencyResolutionManagement {
   versionCatalogs {

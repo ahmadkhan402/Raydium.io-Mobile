@@ -1,0 +1,6 @@
+Install Expo Go app from Play Store/ App Store
+
+Then run npm install command on Terminal(pc)
+
+
+Scan the QR code Using Expo go app to run the app

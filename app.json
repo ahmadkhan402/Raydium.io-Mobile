@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RaydiumApp",
-    "slug": "RaydiumApp",
+    "name": "Raydium.IO",
+    "slug": "raydiumio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,15 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ahmadktkdev.RaydiumApp"
+      "package": "com.tamoorrkhan.RaydiumApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "70d618aa-73e2-4bb1-ae6e-bac0c24737fc"
+        "projectId": "4769c51c-200a-49b0-b65d-77d20e3e08be"
       }
-    }
+    },
+    "owner": "taimoorrkhan"
   }
 }

@@ -1,4 +1,4 @@
-package com.ahmadktkdev.RaydiumApp
+package com.tamoorrkhan.RaydiumApp
 
 import android.os.Build
 import android.os.Bundle
